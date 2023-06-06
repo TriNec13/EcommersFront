@@ -1,5 +1,6 @@
 import { GET_CARTG, GET_PRODUCT, GET_ALL_PRODUCTS } from "../consts";
 import axios from "axios";
+import { json } from "react-router-dom";
 import Swal from "sweetalert";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
@@ -11,18 +12,32 @@ export const UPDATE_USER = "UPDATE_USER";
 export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
+
 export function getAllProducts() {
   return function (dispatch) {
-    return fetch("https://ecommers-front-rust.vercel.app/products")
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({
-          type: GET_ALL_PRODUCTS,
-          payload: json.rows,
-        });
+    return axios.get("/products")
+    .then((response) => response.json())
+    .then((json) => {
+      dispatch({
+        type: GET_ALL_PRODUCTS,
+        payload: json.rows,
       });
+    });
   };
 }
+
+// export function getAllProducts() {
+//   return function (dispatch) {
+//     return fetch("https://ecommers-front-rust.vercel.app/products")
+//       .then((response) => response.json())
+//       .then((json) => {
+//         dispatch({
+//           type: GET_ALL_PRODUCTS,
+//           payload: json.rows,
+//         });
+//       });
+//   };
+// }
 
 export function agregarAlCarrito(newData, id) {
   return function (dispatch) {
