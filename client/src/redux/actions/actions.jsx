@@ -48,12 +48,17 @@ export function agregarAlCarrito(newData, id) {
 
 export function getProduct(id) {
   return function (dispatch) {
-    return axios.get(`/products/${id}`).then((res) => {
-      dispatch({
-        type: GET_PRODUCT,
-        payload: res.data,
+    return axios
+      .get(`/products/${id}`)
+      .then((res) => {
+        dispatch({
+          type: GET_PRODUCT,
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching product:", error);
       });
-    });
   };
 }
 
