@@ -13,7 +13,7 @@ export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
 export function getAllProducts() {
   return function (dispatch) {
-    return fetch("/products")
+    return fetch("https://ecommers-front-rust.vercel.app/products")
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -270,7 +270,7 @@ export function verifyPass(payload) {
 
   var url = `/users/${id}/passVerify`;
   return function (dispatch) {
-    return fetch(`/users/${id}/passVerify`)
+    return fetch(`https://ecommers-front-rust.vercel.app/users/${id}/passVerify`)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
