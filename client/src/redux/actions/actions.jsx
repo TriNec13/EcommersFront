@@ -13,7 +13,7 @@ export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
 export function getAllProducts() {
   return function (dispatch) {
-    return fetch("http://localhost:3001/products")
+    return fetch("/products")
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -115,7 +115,7 @@ export function editProduct(bodyFormData, id) {
 }
 
 export function addUser(payload, email) {
-  var url = "http://localhost:3001/auth/signup";
+  var url = "/auth/signup";
   return function (dispatch) {
     axios
       .post(url, payload, {
@@ -154,7 +154,7 @@ export function addUser(payload, email) {
 
 export function deleteUsers(payload) {
   var id = payload;
-  var url = `http://localhost:3001/users/${id}`;
+  var url = `/users/${id}`;
   return function (dispatch) {
     fetch(url, {
       method: "DELETE",
@@ -176,7 +176,7 @@ export function deleteUsers(payload) {
 export const loginUser = (payload) => {
   const pet = axios({
     method: "post",
-    url: "http://localhost:3001/auth/login",
+    url: "/auth/login",
     headers: {
       "Content-Type": "application/json",
     },
@@ -208,7 +208,7 @@ export const loginUser = (payload) => {
 export const logoutUser = () => {
   const pet = axios({
     method: "get",
-    url: "http://localhost:3001/auth/logout",
+    url: "/auth/logout",
   });
   pet.then((json) => {
     localStorage.removeItem("user");
@@ -231,7 +231,7 @@ export const logoutUser = () => {
 export function Usertoadmin(id) {
   var payload;
 
-  var url = `http://localhost:3001/Admin/promote/${id}`;
+  var url = `/Admin/promote/${id}`;
 
   return function (dispatch) {
     return fetch(url, {
@@ -253,7 +253,7 @@ export function Usertoadmin(id) {
 export function getAllUser(id) {
   if (typeof idUser !== "object") {
     return function (dispatch) {
-      return fetch(`http://localhost:3001/Admin/search/${id}`)
+      return fetch(`/Admin/search/${id}`)
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -268,9 +268,9 @@ export function getAllUser(id) {
 export function verifyPass(payload) {
   var id = payload.id;
 
-  var url = `http://localhost:3001/users/${id}/passVerify`;
+  var url = `/users/${id}/passVerify`;
   return function (dispatch) {
-    return fetch(`http://localhost:3001/users/${id}/passVerify`)
+    return fetch(`/users/${id}/passVerify`)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -283,7 +283,7 @@ export function verifyPass(payload) {
 
 export function ResetPassword(payload) {
   var id = payload.id;
-  var url = `http://localhost:3001/users/${id}/passwordReset`;
+  var url = `/users/${id}/passwordReset`;
   return function (dispatch) {
     return fetch(url, {
       method: "PUT",
@@ -309,7 +309,7 @@ export function ResetPassword(payload) {
 
 export function UpdateUser(payload) {
   var id = payload.id;
-  var url = `http://localhost:3001/users/${id}`;
+  var url = `/users/${id}`;
   return function (dispatch) {
     return fetch(url, {
       method: "PUT",
