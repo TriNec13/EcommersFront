@@ -13,7 +13,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import "../css/App.css";
 import Login from "./Login";
 import axios from "axios";
-axios.default.baseURL = 'http://localhost:3001/';
+axios.default.baseURL = 'https://ecommersback-production.up.railway.app/';
 
 function App() {
   const { pathname } = useLocation();
