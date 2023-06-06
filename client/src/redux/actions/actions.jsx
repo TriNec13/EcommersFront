@@ -19,7 +19,7 @@ export function getAllProducts() {
     .then((response) => {
       dispatch({
         type: GET_ALL_PRODUCTS,
-        payload: json.rows,
+        payload: response.data.rows,
       });
     });
   };
