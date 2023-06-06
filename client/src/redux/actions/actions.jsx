@@ -15,7 +15,7 @@ export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
 export function getAllProducts() {
   return function (dispatch) {
-    return axios.get("https://ecommersback-production.up.railway.app/products")
+    return axios.get("/products")
     .then((response) => {
       dispatch({
         type: GET_ALL_PRODUCTS,
@@ -24,19 +24,6 @@ export function getAllProducts() {
     });
   };
 }
-
-// export function getAllProducts() {
-//   return function (dispatch) {
-//     return fetch("https://ecommers-front-rust.vercel.app/products")
-//       .then((response) => response.json())
-//       .then((json) => {
-//         dispatch({
-//           type: GET_ALL_PRODUCTS,
-//           payload: json.rows,
-//         });
-//       });
-//   };
-// }
 
 export function agregarAlCarrito(newData, id) {
   return function (dispatch) {
