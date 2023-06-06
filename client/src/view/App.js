@@ -13,6 +13,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import "../css/App.css";
 import Login from "./Login";
 import axios from "axios";
+fetch.default.baseURL = 'https://ecommers-front-rust.vercel.app/'
 axios.default.baseURL = 'https://ecommersback-production.up.railway.app/';
 
 function App() {
