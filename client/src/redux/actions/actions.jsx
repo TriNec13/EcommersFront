@@ -1,7 +1,7 @@
 import { GET_CARTG, GET_PRODUCT, GET_ALL_PRODUCTS } from "../consts";
 import axios from "axios";
 import { json } from "react-router-dom";
-import Swal from "sweetalert";
+import Swal from "sweetalert2";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const SIGN_IN = "SIGN_IN";
