@@ -8,8 +8,9 @@ function Productos() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
   const currentPage = useSelector((state) => state.currentPage);
-
+  console.log('antes de useEffect')
   useEffect(() => {
+    console.log('useEffect')
     console.log("currentPage:", currentPage);
     console.log('useEffect1', allProducts); 
     dispatch(actions.getAllProducts(currentPage));
