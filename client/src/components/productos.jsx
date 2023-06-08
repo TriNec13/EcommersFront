@@ -47,6 +47,7 @@ function Productos() {
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
       <button onClick={goToNextPage}>Siguiente</button>
+      <h1>este es un H1</h1>
     </div>
   );
 }
