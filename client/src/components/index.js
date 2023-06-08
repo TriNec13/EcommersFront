@@ -9,6 +9,7 @@ import Carrito from "./Carrito";
 import Producto from "./producto";
 import Productos from "./productos";
 import Carousel from "./Carousel";
+import Loading from "./Loading.html"
 
 export {
 	Nav,
@@ -22,4 +23,5 @@ export {
 	Producto,
 	Productos,
 	Carousel,
+	Loading,
 }

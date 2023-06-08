@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/actions/actions";
-import { Producto } from '../components/index';
+import { Producto, Loading } from '../components/index';
 import styles from '../css/Productos.module.css';
 
 function Productos() {
@@ -28,7 +28,7 @@ function Productos() {
 
   return (
     <div className={styles.Productos}>
-      {allProducts && allProducts.map((p) => {
+      {allProducts ? (allProducts.map((p) => {
         return (
           <Producto 
             key={p.id}
@@ -38,7 +38,7 @@ function Productos() {
             price={p.price}
           />
         )
-      })}
+      })) : (<Loading />)}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
