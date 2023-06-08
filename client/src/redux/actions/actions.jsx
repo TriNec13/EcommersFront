@@ -27,7 +27,7 @@ export function getAllProducts(page) {
 export function agregarAlCarrito(newData, id) {
   return function (dispatch) {
     return axios
-      .post(`/users/${id}/cart`, {
+      .post(`https://ecommersback-production.up.railway.app/users/${id}/cart`, {
         product: newData,
       })
       .then((res) => {
@@ -45,7 +45,7 @@ export function agregarAlCarrito(newData, id) {
 export function getProduct(id) {
   return function (dispatch) {
     return axios
-      .get(`/products/${id}`)
+      .get(`https://ecommersback-production.up.railway.app/products/${id}`)
       .then((res) => {
         dispatch({
           type: GET_PRODUCT,
@@ -85,7 +85,7 @@ export function postProduct(bodyFormData) {
 export function editProduct(bodyFormData, id) {
   return function (dispatch) {
     return axios
-      .put(`/products/${id}`, bodyFormData, {
+      .put(`https://ecommersback-production.up.railway.app/products/${id}`, bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -146,7 +146,7 @@ export function addUser(payload, email) {
 
 export function deleteUsers(payload) {
   var id = payload;
-  var url = `/users/${id}`;
+  var url = `https://ecommersback-production.up.railway.app/users/${id}`;
   return function (dispatch) {
     axios
       .delete(url)
@@ -219,7 +219,7 @@ export const logoutUser = () => {
 
 export function Usertoadmin(id) {
   var payload;
-  var url = `/Admin/promote/${id}`;
+  var url = `https://ecommersback-production.up.railway.app/Admin/promote/${id}`;
   return function (dispatch) {
     axios
       .put(url, payload, {
@@ -297,7 +297,7 @@ export function ResetPassword(payload) {
 
 export function updateUser(payload) {
   var id = payload.id;
-  var url = `/users/${id}`;
+  var url = `https://ecommersback-production.up.railway.app/users/${id}`;
   return function (dispatch) {
     axios
       .put(url, payload, {
