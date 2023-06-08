@@ -31,7 +31,6 @@ function Productos() {
 
   return (
     <div className={styles.Productos}>
-      <h1>este es un H1 principio</h1>
       {allProducts ? (allProducts.map((p) => {
         console.log('dentro', allProducts);
         return (
@@ -48,7 +47,6 @@ function Productos() {
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
       <button onClick={goToNextPage}>Siguiente</button>
-      <h1>este es un H1 final</h1>
     </div>
   );
 }
