@@ -12,6 +12,7 @@ function Productos() {
   useEffect(() => {
     console.log("currentPage:", currentPage);
     dispatch(actions.getAllProducts(currentPage));
+    console.log('useEffect', allProducts); 
   }, [dispatch, currentPage]);
 
   // Función para cambiar a la siguiente página
@@ -39,7 +40,7 @@ function Productos() {
             price={p.price}
           />
         )
-      })) : console.log('fuera', allProducts) (<Loading />)}
+      })) : (console.log('fuera', allProducts), <Loading /> )}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
