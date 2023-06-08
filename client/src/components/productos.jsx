@@ -29,6 +29,7 @@ function Productos() {
   return (
     <div className={styles.Productos}>
       {allProducts ? (allProducts.map((p) => {
+        console.log('dentro', allProducts);
         return (
           <Producto 
             key={p.id}
@@ -38,7 +39,7 @@ function Productos() {
             price={p.price}
           />
         )
-      })) : (<Loading />)}
+      })) : console.log('fuera', allProducts) (<Loading />)}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
