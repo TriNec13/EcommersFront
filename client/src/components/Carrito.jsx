@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../css/Carrito.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { remove1FromCart, removeFromCart } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
+import * as actions from "../redux/actions/actions";
 
 const Carrito = () => {
-  const [productos, setProductos] = useState([
-    
-  ]);
+  const cart = useSelector((state) => state.cart);
+
+  const price = cart
+    .map((ele) => ele.price * ele.quantity)
+    .reduce(function (acumulador, elemento) {
+      return acumulador + elemento;
+    }, 0);
+  console.log(price);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      dispatch(actions.setCart(JSON.parse(savedCart)));
+    }
+  }, [dispatch]);
+
+  console.log(cart);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [nombre, setNombre] = useState("");
   const [dni, setDni] = useState("");
@@ -14,11 +33,16 @@ const Carrito = () => {
   const [mensajeCompra, setMensajeCompra] = useState("");
   const [mostrarBotonComprar, setMostrarBotonComprar] = useState(true);
 
-  const eliminarProducto = (id) => {
-    const nuevosProductos = productos.filter((producto) => producto.id !== id);
-    setProductos(nuevosProductos);
+  const eliminarProducto1 = (id) => {
+    dispatch(remove1FromCart(id));
   };
-
+  const eliminarProducto = (id) => {
+    dispatch(removeFromCart(id));
+  };
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+  
   const mostrarFormularioEmergente = () => {
     setMostrarFormulario(true);
     setMostrarBotonComprar(false); // Oculta el primer botón "Comprar"
@@ -37,7 +61,6 @@ const Carrito = () => {
       direccion !== "" &&
       codigoPostal !== ""
     ) {
-      // Realizar lógica de compra aquí (por ejemplo, enviar datos al servidor)
       setMensajeCompra("¡La compra se ha realizado exitosamente!");
     } else {
       setMensajeCompra("Por favor, completa todos los campos del formulario.");
@@ -46,23 +69,44 @@ const Carrito = () => {
 
   return (
     <div className={styles.General}>
-      {productos.map((producto) => (
-        <div key={producto.id} className={styles.Elemento}>
-         <img src={producto.imagen} alt='Imagen del producto' />
-                    <h1>{producto.titulo}</h1>
-                    <h1>$ {producto.precio}</h1>
-                    <button className={styles.BotonEliminar} onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
-                </div>
-            ))}
+      {cart.map((producto, i) => (
+        <div key={i} className={styles.Elemento}>
+          <img src={producto.image} alt="Imagen del producto" />
+          <h1>{producto.name}</h1>
+          <h1>
+            $ {producto.price}.00 Cantidad: {producto.quantity}{" "}
+          </h1>
+          <h4>Subtotal: {producto.price * producto.quantity}</h4>
+          <button
+            className={styles.BotonEliminar}
+            onClick={() => eliminarProducto1(producto.id)}
+          >
+            Eliminar 1 Producto
+          </button>
+          <button
+            className={styles.BotonEliminar}
+            onClick={() => eliminarProducto(producto.id)}
+          >
+            Eliminar Productos
+          </button>
+        </div>
+      ))}
+
+      {cart.length && (
+        <h2>
+          Total ({cart.length} Articulos): ${price}
+        </h2>
+      )}
 
       {mostrarBotonComprar && (
-        <button
-          className={styles.Comprar}
-          onClick={mostrarFormularioEmergente}
-        >
+        <button className={styles.Comprar} onClick={mostrarFormularioEmergente}>
           Comprar
         </button>
       )}
+      <Link></Link>
+      <button className={styles.Comprar}>
+        <Link to={`/home`}>Mas Productos</Link>
+      </button>
 
       {mostrarFormulario && (
         <div className={styles.ElementoCompra}>
@@ -100,7 +144,10 @@ const Carrito = () => {
           <button className={styles.Comprar} onClick={realizarCompra}>
             Comprar
           </button>
-          <button className={styles.Comprar} onClick={ocultarFormularioEmergente}>
+          <button
+            className={styles.Comprar}
+            onClick={ocultarFormularioEmergente}
+          >
             Cancelar
           </button>
         </div>
@@ -117,7 +164,6 @@ const Carrito = () => {
 };
 
 export default Carrito;
-
 
 // import React from "react";
 // import AddToBag from "../AddToBag";

@@ -1,6 +1,18 @@
-import { GET_CARTG, GET_PRODUCT, GET_ALL_PRODUCTS, SET_CURRENT_PAGE, SET_PRODUCTS_PER_PAGE } from "../consts";
+import {
+  GET_CARTG,
+  GET_PRODUCT,
+  GET_ALL_PRODUCTS,
+  FILTER_PRODUCTS,
+  RESET_FILTER,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  SET_CART,
+  SET_CURRENT_PAGE,
+  SET_PRODUCTS_PER_PAGE,
+} from "../consts";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const SIGN_IN = "SIGN_IN";
@@ -11,9 +23,11 @@ export const UPDATE_USER = "UPDATE_USER";
 export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
+const URL = 'https://ecommersback-production.up.railway.app'
+
 export function getAllProducts(page) {
   return function (dispatch) {
-    return axios.get(`https://ecommersback-production.up.railway.app/products?page=${page}`).then((response) => {
+    return axios.get(`${URL}/products?page=${page}`).then((response) => {
       console.log('Response.data', response.data.rows)
       dispatch({
         type: GET_ALL_PRODUCTS,
@@ -22,12 +36,10 @@ export function getAllProducts(page) {
     });
   };
 }
-
-
 export function agregarAlCarrito(newData, id) {
   return function (dispatch) {
     return axios
-      .post(`https://ecommersback-production.up.railway.app/users/${id}/cart`, {
+      .post(`${URL}/users/${id}/cart`, {
         product: newData,
       })
       .then((res) => {
@@ -45,7 +57,7 @@ export function agregarAlCarrito(newData, id) {
 export function getProduct(id) {
   return function (dispatch) {
     return axios
-      .get(`https://ecommersback-production.up.railway.app/products/${id}`)
+      .get(`${URL}/products/${id}`)
       .then((res) => {
         dispatch({
           type: GET_PRODUCT,
@@ -61,7 +73,7 @@ export function getProduct(id) {
 export function postProduct(bodyFormData) {
   return function (dispatch) {
     return axios
-      .post("https://ecommersback-production.up.railway.app/products", bodyFormData, {
+      .post(`${URL}/products`, bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -85,7 +97,7 @@ export function postProduct(bodyFormData) {
 export function editProduct(bodyFormData, id) {
   return function (dispatch) {
     return axios
-      .put(`https://ecommersback-production.up.railway.app/products/${id}`, bodyFormData, {
+      .put(`${URL}/products/${id}`, bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -107,7 +119,7 @@ export function editProduct(bodyFormData, id) {
 }
 
 export function addUser(payload, email) {
-  var url = "https://ecommersback-production.up.railway.app/auth/signup";
+  var url = URL + "/auth/signup";
   return function (dispatch) {
     axios
       .post(url, payload, {
@@ -146,7 +158,7 @@ export function addUser(payload, email) {
 
 export function deleteUsers(payload) {
   var id = payload;
-  var url = `https://ecommersback-production.up.railway.app/users/${id}`;
+  var url = `${URL}/users/${id}`;
   return function (dispatch) {
     axios
       .delete(url)
@@ -170,27 +182,31 @@ export function deleteUsers(payload) {
 
 export const loginUser = async (payload) => {
   try {
-    const response = await axios.post('https://ecommersback-production.up.railway.app/auth/login', {
-      email: payload.email,
-      password: payload.password,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${URL}/auth/login`,
+      {
+        email: payload.email,
+        password: payload.password,
       },
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    localStorage.setItem('user', JSON.stringify(response.data));
+    localStorage.setItem("user", JSON.stringify(response.data));
 
     Swal.fire({
-      text: 'Ha iniciado sesión correctamente',
-      icon: 'success',
-      timer: '2000',
+      text: "Ha iniciado sesión correctamente",
+      icon: "success",
+      timer: "2000",
     });
   } catch (error) {
     Swal.fire({
-      text: 'Usuario no encontrado',
-      icon: 'warning',
-      timer: '2000',
+      text: "Usuario no encontrado",
+      icon: "warning",
+      timer: "2000",
     });
   }
 };
@@ -198,7 +214,7 @@ export const loginUser = async (payload) => {
 export const logoutUser = () => {
   return function (dispatch) {
     axios
-      .get("/auth/logout")
+      .get(`${URL}/auth/logout`)
       .then((response) => {
         localStorage.removeItem("user");
         Swal.fire({
@@ -219,7 +235,7 @@ export const logoutUser = () => {
 
 export function Usertoadmin(id) {
   var payload;
-  var url = `https://ecommersback-production.up.railway.app/Admin/promote/${id}`;
+  var url = `${URL}/Admin/promote/${id}`;
   return function (dispatch) {
     axios
       .put(url, payload, {
@@ -242,7 +258,7 @@ export function getAllUser(id) {
   if (typeof idUser !== "object") {
     return function (dispatch) {
       axios
-        .get(`https://ecommersback-production.up.railway.app/Admin/search/${id}`)
+        .get(`${URL}/Admin/search/${id}`)
         .then((response) => {
           dispatch({
             type: GET_USER,
@@ -260,7 +276,7 @@ export function verifyPass(payload) {
   var id = payload.id;
   return function (dispatch) {
     axios
-      .get(`https://ecommersback-production.up.railway.app/users/${id}/passVerify`)
+      .get(`${URL}/users/${id}/passVerify`)
       .then((response) => {
         dispatch({
           type: VERIFY_PASSWORD,
@@ -275,7 +291,7 @@ export function verifyPass(payload) {
 
 export function ResetPassword(payload) {
   var id = payload.id;
-  var url = `https://ecommersback-production.up.railway.app/users/${id}/passwordReset`;
+  var url = `${URL}/users/${id}/passwordReset`;
   return function (dispatch) {
     axios
       .put(url, payload, {
@@ -297,7 +313,7 @@ export function ResetPassword(payload) {
 
 export function updateUser(payload) {
   var id = payload.id;
-  var url = `https://ecommersback-production.up.railway.app/users/${id}`;
+  var url = `${URL}/users/${id}`;
   return function (dispatch) {
     axios
       .put(url, payload, {
@@ -316,6 +332,48 @@ export function updateUser(payload) {
       });
   };
 }
+
+export function filterProducts(category) {
+  return {
+    type: FILTER_PRODUCTS,
+    payload: {
+      category: category,
+    },
+  };
+}
+
+export const resetFilter = () => {
+  return {
+    type: RESET_FILTER,
+  };
+};
+
+export function addToCarta(payload) {
+  return {
+    type: ADD_TO_CART,
+    payload,
+  };
+}
+
+export function remove1FromCart(payload) {
+  return {
+    type: REMOVE_ONE_FROM_CART,
+    payload,
+  };
+}
+export function removeFromCart(payload) {
+  return {
+    type: REMOVE_ALL_FROM_CART,
+    payload,
+  };
+}
+
+export const setCart = (cart) => {
+  return {
+    type: SET_CART,
+    payload: cart,
+  };
+};
 
 export function setCurrentPage(page) {
   return {

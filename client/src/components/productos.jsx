@@ -1,20 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/actions/actions";
-import { Producto } from '../components/index';
-import styles from '../css/Productos.module.css';
+import { Producto } from "../components/index";
+import styles from "../css/Productos.module.css";
 
 function Productos() {
-  const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.allProducts);
+  const products = useSelector((state) => state.allProducts);
+  const cart = useSelector((state) => state.cart);
   const currentPage = useSelector((state) => state.currentPage);
+  const filteredProducts = useSelector((state) => state.filteredProducts);
+  const dispatch = useDispatch();
+
+  const addToCart = (id) => {
+    dispatch(actions.addToCarta(id));
+    alert("Se Ha Agregado el Producto");
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
     dispatch(actions.getAllProducts(currentPage));
   }, [dispatch, currentPage]);
 
-  // Función para cambiar a la siguiente página
   const goToNextPage = () => {
+    console.log("Se presiono")
     dispatch(actions.setCurrentPage(currentPage + 1));
   };
 
@@ -26,17 +37,13 @@ function Productos() {
 
   return (
     <div className={styles.Productos}>
-      {allProducts ? (allProducts.map((p) => {
-        return (
-          <Producto 
-            key={p.id}
-            id={p.id}
-            name={p.name}
-            image={p.image}
-            price={p.price}
-          />
-        )
-      })) : (<p>Loading...</p> )}
+      {filteredProducts.length > 0
+        ? filteredProducts.map((p) => (
+            <Producto key={p.id} products={p} addToCart={addToCart} />
+          ))
+        : products.map((p) => (
+            <Producto key={p.id} products={p} addToCart={addToCart} />
+          ))}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
