@@ -28,7 +28,7 @@ function Productos() {
 
   return (
     <div className={styles.Productos}>
-      {allProducts.map((p) => {
+      {allProducts && allProducts.map((p) => {
         return (
           <Producto 
             key={p.id}
