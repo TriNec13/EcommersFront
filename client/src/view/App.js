@@ -11,9 +11,9 @@ import {
 import { Routes, Route, useLocation } from "react-router-dom";
 import "../css/App.css";
 import Login from "./Login";
-import axios from "axios";
+//import axios from "axios";
 
-axios.default.baseURL = 'https://ecommersback-production.up.railway.app/';
+//axios.default.baseURL = 'https://ecommersback-production.up.railway.app/';
 
 function App() {
   const { pathname } = useLocation();

@@ -61,7 +61,7 @@ export function getProduct(id) {
 export function postProduct(bodyFormData) {
   return function (dispatch) {
     return axios
-      .post("/products", bodyFormData, {
+      .post("https://ecommersback-production.up.railway.app/products", bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -107,7 +107,7 @@ export function editProduct(bodyFormData, id) {
 }
 
 export function addUser(payload, email) {
-  var url = "/auth/signup";
+  var url = "https://ecommersback-production.up.railway.app/auth/signup";
   return function (dispatch) {
     axios
       .post(url, payload, {
@@ -170,7 +170,7 @@ export function deleteUsers(payload) {
 
 export const loginUser = async (payload) => {
   try {
-    const response = await axios.post('/auth/login', {
+    const response = await axios.post('https://ecommersback-production.up.railway.app/auth/login', {
       email: payload.email,
       password: payload.password,
     }, {
@@ -242,7 +242,7 @@ export function getAllUser(id) {
   if (typeof idUser !== "object") {
     return function (dispatch) {
       axios
-        .get(`/Admin/search/${id}`)
+        .get(`https://ecommersback-production.up.railway.app/Admin/search/${id}`)
         .then((response) => {
           dispatch({
             type: GET_USER,
@@ -260,7 +260,7 @@ export function verifyPass(payload) {
   var id = payload.id;
   return function (dispatch) {
     axios
-      .get(`/users/${id}/passVerify`)
+      .get(`https://ecommersback-production.up.railway.app/users/${id}/passVerify`)
       .then((response) => {
         dispatch({
           type: VERIFY_PASSWORD,
@@ -275,7 +275,7 @@ export function verifyPass(payload) {
 
 export function ResetPassword(payload) {
   var id = payload.id;
-  var url = `/users/${id}/passwordReset`;
+  var url = `https://ecommersback-production.up.railway.app/users/${id}/passwordReset`;
   return function (dispatch) {
     axios
       .put(url, payload, {
