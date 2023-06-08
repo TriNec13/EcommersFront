@@ -13,7 +13,7 @@ export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
 export function getAllProducts(page) {
   return function (dispatch) {
-    return axios.get(`https://ecommersback-production.up.railway.app/products?page=${page}`).then((response) => {
+    return axios.get(`/products?page=${page}`).then((response) => {
       console.log('Response.data', response.data.rows)
       dispatch({
         type: GET_ALL_PRODUCTS,
