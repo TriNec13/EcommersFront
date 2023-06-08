@@ -8,18 +8,13 @@ function Productos() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
   const currentPage = useSelector((state) => state.currentPage);
-  console.log('antes de useEffect')
+
   useEffect(() => {
-    console.log('useEffect')
-    console.log("currentPage:", currentPage);
-    console.log('useEffect1', allProducts); 
     dispatch(actions.getAllProducts(currentPage));
-    console.log('useEffect2', allProducts); 
   }, [dispatch, currentPage]);
 
   // Función para cambiar a la siguiente página
   const goToNextPage = () => {
-    console.log("Se presiono")
     dispatch(actions.setCurrentPage(currentPage + 1));
   };
 
@@ -32,7 +27,6 @@ function Productos() {
   return (
     <div className={styles.Productos}>
       {allProducts ? (allProducts.map((p) => {
-        console.log('dentro', allProducts);
         return (
           <Producto 
             key={p.id}
@@ -42,7 +36,7 @@ function Productos() {
             price={p.price}
           />
         )
-      })) : (console.log('fuera', allProducts), <p>Loading...</p> )}
+      })) : (<p>Loading...</p> )}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}

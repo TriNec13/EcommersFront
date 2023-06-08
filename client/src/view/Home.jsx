@@ -9,11 +9,8 @@ const Home = () => {
       <div className={styles.General}>
         <h1>Destacados de la semana</h1>
         <Carousel />
-        <h1>este es un H1 principio</h1>
         <Productos />
-        <h1>este es un H1 final</h1>
       </div>
-      
     </div>
   );
 }
