@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/actions/actions";
-import { Producto, Loading } from '../components/index';
+import { Producto } from '../components/index';
 import styles from '../css/Productos.module.css';
 
 function Productos() {
@@ -42,7 +42,7 @@ function Productos() {
             price={p.price}
           />
         )
-      })) : (console.log('fuera', allProducts), <Loading /> )}
+      })) : (console.log('fuera', allProducts), <p>Loading...</p> )}
       {currentPage > 1 && (
           <button onClick={goToPreviousPage}>Atrás</button>
         )}
