@@ -11,8 +11,9 @@ function Productos() {
 
   useEffect(() => {
     console.log("currentPage:", currentPage);
+    console.log('useEffect1', allProducts); 
     dispatch(actions.getAllProducts(currentPage));
-    console.log('useEffect', allProducts); 
+    console.log('useEffect2', allProducts); 
   }, [dispatch, currentPage]);
 
   // Función para cambiar a la siguiente página

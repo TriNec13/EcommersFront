@@ -7,7 +7,6 @@ import {
   Detail,
   Carrito,
   SingUp,
-  Producto,
 } from "../components/index";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "../css/App.css";
