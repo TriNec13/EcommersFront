@@ -22,20 +22,28 @@ export const RESET_PASSWORD = "RESET_PASSWORD";
 export const UPDATE_USER = "UPDATE_USER";
 export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
+export const ADD_ONE_FROM_CART = "ADD_ONE_FROM_CART";
 
-const URL = 'https://ecommersback-production.up.railway.app'
+const URL = 'http://localhost:3001'
 
 export function getAllProducts(page) {
   return function (dispatch) {
     return axios.get(`${URL}/products?page=${page}`).then((response) => {
-      console.log('Response.data', response.data.rows)
       dispatch({
         type: GET_ALL_PRODUCTS,
         payload: response.data.rows,
       });
+    }).catch((err) => {
+      Swal.fire({
+        icon: "error",
+          title: "Oops...",
+          text: "Ya no quedan mas productos",
+          timer: "2000",
+      });
     });
   };
 }
+
 export function agregarAlCarrito(newData, id) {
   return function (dispatch) {
     return axios
@@ -194,22 +202,23 @@ export const loginUser = async (payload) => {
         },
       }
     );
-
     localStorage.setItem("user", JSON.stringify(response.data));
-
     Swal.fire({
       text: "Ha iniciado sesión correctamente",
       icon: "success",
       timer: "2000",
     });
+    return true;
   } catch (error) {
     Swal.fire({
       text: "Usuario no encontrado",
       icon: "warning",
       timer: "2000",
     });
+    return false;
   }
 };
+
 
 export const logoutUser = () => {
   return function (dispatch) {
@@ -349,15 +358,36 @@ export const resetFilter = () => {
 };
 
 export function addToCarta(payload) {
-  return {
-    type: ADD_TO_CART,
-    payload,
-  };
+  try {
+    Swal.fire({
+      text: "Se ha agregado el producto",
+      icon: "success",
+      timer: 1100,
+    });
+
+    return {
+      type: ADD_TO_CART,
+      payload,
+    };
+  } catch {
+    Swal.fire({
+      text: "Error al agregar el producto",
+      icon: "warning",
+      timer: 2000,
+    });
+  }
 }
+
 
 export function remove1FromCart(payload) {
   return {
     type: REMOVE_ONE_FROM_CART,
+    payload,
+  };
+}
+export function sume1FromCart(payload) {
+  return {
+    type: ADD_ONE_FROM_CART,
     payload,
   };
 }
