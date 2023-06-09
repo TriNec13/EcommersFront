@@ -24,7 +24,7 @@ export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 export const ADD_ONE_FROM_CART = "ADD_ONE_FROM_CART";
 
-const URL = 'http://localhost:3001'
+const URL = 'https://ecommersback-production.up.railway.app'
 
 export function getAllProducts(page) {
   return function (dispatch) {

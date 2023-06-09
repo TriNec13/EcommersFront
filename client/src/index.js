@@ -8,7 +8,7 @@ import store from './redux/Store';
 import axios from 'axios';
 import { AuthProvider } from "./components/AuthContext";
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'https://ecommersback-production.up.railway.app';
 
 const rootElement = document.getElementById('root');
 
