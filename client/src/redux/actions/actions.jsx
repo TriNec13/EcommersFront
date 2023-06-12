@@ -10,9 +10,13 @@ import {
   SET_CART,
   SET_CURRENT_PAGE,
   SET_PRODUCTS_PER_PAGE,
-  SEARCH_BY_NAME
+  GET_PLATFORMS_ROUTE,
+	GET_LICENSES_ROUTE,
+  ADD_PRODUCT,
+  GET_CATEGORY_ROUTE,
+  SEARCH_BY_NAME,
 } from "../consts";
-
+import { toast } from 'react-toastify';
 import axios from "axios";
 import Swal from "sweetalert2";
 export const ADD_USER = "ADD_USER";
@@ -25,10 +29,11 @@ export const UPDATE_USER = "UPDATE_USER";
 export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 export const ADD_ONE_FROM_CART = "ADD_ONE_FROM_CART";
-export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
 const URL = 'https://ecommersback-production.up.railway.app'
+
 
 export function getAllProducts(page) {
   return function (dispatch) {
@@ -224,23 +229,24 @@ export const loginUser = async (payload) => {
 };
 
 
+
+
+
 export const logoutUser = () => {
   return function (dispatch) {
-    axios
+    return axios
       .get(`${URL}/auth/logout`)
       .then((response) => {
         localStorage.removeItem("user");
-        Swal.fire({
-          text: "Se ha cerrado la sesión",
-          icon: "success",
-          timer: "2000",
+        toast.success('Se ha cerrado la sesión', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 2000,
         });
       })
       .catch((error) => {
-        Swal.fire({
-          text: "Error",
-          icon: "warning",
-          timer: "2000",
+        toast.error('Error al cerrar sesión', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 2000,
         });
       });
   };
@@ -346,14 +352,12 @@ export function updateUser(payload) {
   };
 }
 
-export function filterProducts(category) {
+export const filterProducts = (categories) => {
   return {
     type: FILTER_PRODUCTS,
-    payload: {
-      category: category,
-    },
+    payload: categories,
   };
-}
+};
 
 export const resetFilter = () => {
   return {
@@ -428,12 +432,31 @@ export function setProductsPerPage(count) {
   };
 }
 
-export const addToWishlist = (id) => {
-  return {
-    type: ADD_TO_WISHLIST,
-    payload: id,
+export function addToWishlist(payload) {
+  return (dispatch) => {
+    try {
+      dispatch({
+        type: ADD_TO_WISHLIST,
+        payload,
+      });
+
+      Swal.fire({
+        text: "Se ha agregado el producto",
+        icon: "success",
+        timer: 1100,
+      });
+      
+    } catch (error) {
+      Swal.fire({
+        text: "Error al agregar el producto",
+        icon: "warning",
+        timer: 2000,
+      });
+      throw error;
+    }
   };
-};
+}
+
 
 export const removeFromWishlist = (id) => {
   return {
@@ -441,8 +464,95 @@ export const removeFromWishlist = (id) => {
     payload: id,
   };
 };
+export function getPlatformsRoute() {
+	return function (dispatch) {
+		return axios
+			.get(`${URL}/platforms`)
+			.then((response) => {
+				const platforms = response.data.map(
+					(platforms) => platforms.name,
+				);
+				dispatch({
+					type: GET_PLATFORMS_ROUTE,
+					payload: platforms,
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+}
 
-export const searchByName = (searchTerm) => ({
-  type: SEARCH_BY_NAME,
-  payload: searchTerm,
-});
+export function getLicensesRoute() {
+	return function (dispatch) {
+		return axios
+			.get(`${URL}/licenses`)
+			.then((response) => {
+				const licenses = response.data.map((licenses) => licenses.name);
+				dispatch({
+					type: GET_LICENSES_ROUTE,
+					payload: licenses,
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+}
+export function addProduct(payload) {
+	return function (dispatch) {
+		return axios
+			.post(`${URL}/products`, payload)
+			.then((response) => {
+				dispatch({
+					type: ADD_PRODUCT,
+					payload: response.data,
+				});
+			})
+			.catch((error) => {
+				console.error('Error adding product:', error);
+			});
+	};
+}
+export function getCategoryRoute() {
+	return function (dispatch) {
+		return axios
+			.get(`${URL}/categories`)
+			.then((response) => {
+				const categories = response.data.map(
+					(category) => category.name,
+				);
+				dispatch({
+					type: GET_CATEGORY_ROUTE,
+					payload: categories,
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+}
+export const searchByName = (searchTerm) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.get(`/products?name=${searchTerm}`);
+      const filteredProducts = response.data;
+
+      dispatch({
+        type: SEARCH_BY_NAME,
+        payload: filteredProducts,
+      });
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        Swal.fire({
+          text: 'Producto no encontrado',
+          icon: 'warning',
+          timer: 2000,
+        });
+      } else {
+        throw err;
+      }
+    }
+  };
+};
+

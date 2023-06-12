@@ -1,40 +1,40 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate,  } from "react-router-dom";
 import styles from "../css/Nav.module.css";
 import LogoClaro from "../img/LogoClaro.png";
 import Carrito from "../img/Carrito.png";
 import FilterComponent from './FilterByCategorie';
-//import Ordenar from './Ordenar';
+import Ordenar from './Ordenar';
 import { AuthContext } from "./AuthContext";
 import { searchByName } from '../redux/actions/actions';
+import { useDispatch } from 'react-redux';
+
 
 const Nav = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
-    logout();
+     setIsLoggedIn(false);
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
+    // logoutUser();
   };
 
-  // const handleOrdenarChange = (opcion) => {
-  //   // Aquí puedes realizar acciones según la opción seleccionada en el componente Ordenar
-  //   console.log("Opción de ordenamiento seleccionada:", opcion);
-  // };
+  const handleOrdenarChange = (opcion) => {
+    // Aquí puedes realizar acciones según la opción seleccionada en el componente Ordenar
+    console.log("Opción de ordenamiento seleccionada:", opcion);
+  };
+    const handleSearch = (event) => {
+    const searchTerm = event.target.value;
+    dispatch(searchByName(searchTerm));
+  };
 
   const handleRefrescar = () => {
     pathname === "/home" && window.location.reload();
   };
-
-  const handleSearch = (event) => {
-    const searchTerm = event.target.value;
-    dispatch(searchByName(searchTerm));
-  };
-  
 
   return (
     <div className={styles.Nav}>
@@ -50,6 +50,9 @@ const Nav = () => {
           </Link>
           <Link to="/vender">
             <button className={styles.ButtonNav}>Vender</button>
+          </Link>
+          <Link to="/wishlist">
+            <button className={styles.ButtonNav}>Deseos</button>
           </Link>
           {pathname !== "/vender" && pathname !== "/carrito" && (
           <div>
