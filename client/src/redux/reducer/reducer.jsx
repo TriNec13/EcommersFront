@@ -29,11 +29,14 @@ import {
   GET_LICENSES_ROUTE,
   ADD_PRODUCT,
   SEARCH_BY_NAME,
+  SET_CATEGORIES,
+  SET_PRODUCTS,
+  SET_FILTERS,
 } from "../consts";
 
 const initialState = {
-  allProducts: [],
-  products: {},
+  // allProducts: [],
+  products: [],
   user: {},
   users: [],
   data: [],
@@ -48,6 +51,22 @@ const initialState = {
   licensesRoute: [],
   categoryRoute: [],
   newProduct: [],
+  categories: [],
+  filters: {
+    name: "",
+    quantity: null,
+    quantitygte: null,
+    quantitylte: null,
+    price: null,
+    pricegte: null,
+    pricelte: null,
+    categories: [],
+    order: "",
+    direction: "",
+    page: 1,
+    platforms: [],
+    licenses: [],
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -65,17 +84,17 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        allProducts: action.payload,
+        products: action.payload,
       };
     case FILTER_PRODUCTS:
       const { category } = action.payload;
       let filterProduct;
       if (category.length > 0) {
-        filterProduct = state.allProducts.filter((product) =>
+        filterProduct = state.products.filter((product) =>
           category.includes(product.categories[0].name)
         );
       } else {
-        filterProduct = state.allProducts;
+        filterProduct = state.products;
       }
       return {
         ...state,
@@ -121,27 +140,31 @@ const rootReducer = (state = initialState, action) => {
           }
         }),
       };
-    case ADD_TO_CART: {
-      let newItem = state.allProducts.find(
-        (product) => product.id === action.payload
-      );
 
-      let itemInCart = state.cart.find((item) => item.id === newItem.id);
-
-      return itemInCart
-        ? {
-            ...state,
-            cart: state.cart.map((item) =>
-              item.id === newItem.id
-                ? { ...item, quantity: item.quantity + 1 }
-                : item
-            ),
-          }
-        : {
-            ...state,
-            cart: [...state.cart, { ...newItem, quantity: 1 }],
-          };
+    case SET_CART: {
+      const newItem = state.products.find((product) => product.id === action.payload);
+    
+      if (!newItem) {
+        return state; // No se encontró el producto, no se realiza ningún cambio en el estado
+      }
+    
+      const existingItemIndex = state.cart.findIndex((item) => item.id === newItem.id);
+    
+      if (existingItemIndex !== -1) {
+        return {
+          ...state,
+          cart: state.cart.map((item, index) =>
+            index === existingItemIndex ? { ...item, quantity: item.quantity + 1 } : item
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cart: [...state.cart, { ...newItem, quantity: 1 }],
+        };
+      }
     }
+    
 
     case REMOVE_ONE_FROM_CART: {
       let itemToDelete = state.cart.find((item) => item.id === action.payload);
@@ -186,11 +209,11 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case SET_CART:
-      return {
-        ...state,
-        cart: action.payload,
-      };
+    // case SET_CART:
+    //   return {
+    //     ...state,
+    //     cart: action.payload,
+    //   };
 
     case SET_CURRENT_PAGE:
       return {
@@ -234,7 +257,7 @@ const rootReducer = (state = initialState, action) => {
     case ADD_PRODUCT:
       return {
         ...state,
-        allProducts: [...state.allProducts, action.payload],
+        products: [...state.products, action.payload],
         newProduct: action.payload,
       };
     case SEARCH_BY_NAME:
@@ -249,7 +272,19 @@ const rootReducer = (state = initialState, action) => {
         filteredProducts: filteredProducts,
         isFiltering: true,
       };
-
+      case SET_CATEGORIES:
+        return {
+          ...state,
+          categories: action.payload,
+        };
+        case SET_PRODUCTS:
+          return {
+            ...state,
+            products: action.payload.rows,
+            countProducts: action.payload.count,
+          };
+          case SET_FILTERS:
+            return { ...state, filters: action.payload };
     default:
       return state;
   }

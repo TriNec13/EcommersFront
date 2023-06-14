@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './redux/Store';
 import axios from 'axios';
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider } from './components/AuthContext';
 
 axios.defaults.baseURL = 'https://ecommersback-production.up.railway.app';
 
@@ -15,8 +15,10 @@ const rootElement = document.getElementById('root');
 ReactDOM.createRoot(rootElement).render(
   <Provider store={store}>
     <BrowserRouter>
-    <AuthProvider>
-      <App />
+      <AuthProvider>
+      
+          <App />
+     
       </AuthProvider>
     </BrowserRouter>
   </Provider>

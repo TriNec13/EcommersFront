@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../css/Detail.module.css";
+import styles from "../css/Detail.css";
 import * as actions from "../redux/actions/actions";
+import Swal from "sweetalert2";
 
 export default function Detail() {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Detail() {
   const { id } = useParams();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,8 +33,22 @@ export default function Detail() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (productId) => {
-    dispatch(actions.addToCarta(productId));
+  const addToCart = (id) => {
+    try{
+    dispatch(actions.setCart(id));
+    Swal.fire({
+        text: "Se ha agregado el producto",
+        icon: "success",
+        timer: 1100,
+      });
+    } catch (error) {
+      Swal.fire({
+        text: "Error al agregar el producto",
+        icon: "warning",
+        timer: 2000,
+      });
+      throw error;
+    }
   };
 
   return (
@@ -58,12 +74,13 @@ export default function Detail() {
               <h2>Categoría</h2>
               <p>{product.categoria}</p>
             </section>
-            <div className={styles.Botones}>
+            <div >
               <Link to={"/home"}>
-                <button className={styles.Boton}>Regresar a inicio</button>
+                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Regresar a inicio</button>
               </Link>
               <button
-                className={styles.Boton}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => addToCart(product.id)}
               >
                 Agregar al Carrito
@@ -77,3 +94,4 @@ export default function Detail() {
     </main>
   );
 }
+

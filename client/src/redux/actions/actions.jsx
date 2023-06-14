@@ -4,17 +4,19 @@ import {
   GET_ALL_PRODUCTS,
   FILTER_PRODUCTS,
   RESET_FILTER,
-  ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   SET_CART,
-  SET_CURRENT_PAGE,
-  SET_PRODUCTS_PER_PAGE,
-  GET_PLATFORMS_ROUTE,
-	GET_LICENSES_ROUTE,
+  // SET_CURRENT_PAGE,
+  // SET_PRODUCTS_PER_PAGE,
+  // GET_PLATFORMS_ROUTE,
+	// GET_LICENSES_ROUTE,
   ADD_PRODUCT,
-  GET_CATEGORY_ROUTE,
+  // GET_CATEGORY_ROUTE,
   SEARCH_BY_NAME,
+  SET_FILTERS,
+  SET_CATEGORIES,
+  SET_PRODUCTS,
 } from "../consts";
 import { toast } from 'react-toastify';
 import axios from "axios";
@@ -34,6 +36,26 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
 const URL = 'https://ecommersback-production.up.railway.app'
 
+export const setProducts = (products) => {
+  return {
+    type: SET_PRODUCTS,
+    payload: products,
+  };
+};
+export const setFilters = (filters) => {
+  
+  return {  
+    type: SET_FILTERS,
+    payload: filters,
+  };
+};
+
+export const setCategories = (categories) => {
+  return {
+    type: SET_CATEGORIES,
+    payload: categories,
+  }
+};
 
 export function getAllProducts(page) {
   return function (dispatch) {
@@ -365,28 +387,12 @@ export const resetFilter = () => {
   };
 };
 
-export function addToCarta(payload) {
+export function setCart(payload) {
   return (dispatch) => {
-    try {
       dispatch({
-        type: ADD_TO_CART,
+        type: SET_CART,
         payload,
       });
-
-      Swal.fire({
-        text: "Se ha agregado el producto",
-        icon: "success",
-        timer: 1100,
-      });
-      
-    } catch (error) {
-      Swal.fire({
-        text: "Error al agregar el producto",
-        icon: "warning",
-        timer: 2000,
-      });
-      throw error;
-    }
   };
 }
 
@@ -411,26 +417,26 @@ export function removeFromCart(payload) {
   };
 }
 
-export const setCart = (cart) => {
-  return {
-    type: SET_CART,
-    payload: cart,
-  };
-};
+// export const setCart = (cart) => {
+//   return {
+//     type: SET_CART,
+//     payload: cart,
+//   };
+// };
 
-export function setCurrentPage(page) {
-  return {
-    type: SET_CURRENT_PAGE,
-    payload: parseInt(page),
-  };
-}
+// export function setCurrentPage(page) {
+//   return {
+//     type: SET_CURRENT_PAGE,
+//     payload: parseInt(page),
+//   };
+// }
 
-export function setProductsPerPage(count) {
-  return {
-    type: SET_PRODUCTS_PER_PAGE,
-    payload: count,
-  };
-}
+// export function setProductsPerPage(count) {
+//   return {
+//     type: SET_PRODUCTS_PER_PAGE,
+//     payload: count,
+//   };
+// }
 
 export function addToWishlist(payload) {
   return (dispatch) => {
@@ -464,41 +470,41 @@ export const removeFromWishlist = (id) => {
     payload: id,
   };
 };
-export function getPlatformsRoute() {
-	return function (dispatch) {
-		return axios
-			.get(`${URL}/platforms`)
-			.then((response) => {
-				const platforms = response.data.map(
-					(platforms) => platforms.name,
-				);
-				dispatch({
-					type: GET_PLATFORMS_ROUTE,
-					payload: platforms,
-				});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-}
+// export function getPlatformsRoute() {
+// 	return function (dispatch) {
+// 		return axios
+// 			.get(`${URL}/platforms`)
+// 			.then((response) => {
+// 				const platforms = response.data.map(
+// 					(platforms) => platforms.name,
+// 				);
+// 				dispatch({
+// 					type: GET_PLATFORMS_ROUTE,
+// 					payload: platforms,
+// 				});
+// 			})
+// 			.catch((error) => {
+// 				console.log(error);
+// 			});
+// 	};
+// }
 
-export function getLicensesRoute() {
-	return function (dispatch) {
-		return axios
-			.get(`${URL}/licenses`)
-			.then((response) => {
-				const licenses = response.data.map((licenses) => licenses.name);
-				dispatch({
-					type: GET_LICENSES_ROUTE,
-					payload: licenses,
-				});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-}
+// export function getLicensesRoute() {
+// 	return function (dispatch) {
+// 		return axios
+// 			.get(`${URL}/licenses`)
+// 			.then((response) => {
+// 				const licenses = response.data.map((licenses) => licenses.name);
+// 				dispatch({
+// 					type: GET_LICENSES_ROUTE,
+// 					payload: licenses,
+// 				});
+// 			})
+// 			.catch((error) => {
+// 				console.log(error);
+// 			});
+// 	};
+// }
 export function addProduct(payload) {
 	return function (dispatch) {
 		return axios
@@ -514,24 +520,25 @@ export function addProduct(payload) {
 			});
 	};
 }
-export function getCategoryRoute() {
-	return function (dispatch) {
-		return axios
-			.get(`${URL}/categories`)
-			.then((response) => {
-				const categories = response.data.map(
-					(category) => category.name,
-				);
-				dispatch({
-					type: GET_CATEGORY_ROUTE,
-					payload: categories,
-				});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-}
+// export function getCategoryRoute() {
+// 	return function (dispatch) {
+// 		return axios
+// 			.get(`${URL}/categories`)
+// 			.then((response) => {
+// 				const categories = response.data.map(
+// 					(category) => category.name,
+// 				);
+// 				dispatch({
+// 					type: GET_CATEGORY_ROUTE,
+// 					payload: categories,
+// 				});
+// 			})
+// 			.catch((error) => {
+// 				console.log(error);
+// 			});
+// 	};
+// }
+
 export const searchByName = (searchTerm) => {
   return async (dispatch, getState) => {
     try {
@@ -556,3 +563,65 @@ export const searchByName = (searchTerm) => {
   };
 };
 
+export const fetchCategories = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/Categories`);
+      dispatch(setCategories(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+export const fetchProducts = (filters) => {
+  const {
+    name,
+    quantity,
+    quantitygte,
+    quantitylte,
+    price,
+    pricegte,
+    pricelte,
+    categories,
+    order,
+    direction,
+    page,
+    platforms,
+    licenses,
+  } = filters;
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("/products", {
+        params: {
+          name,
+          quantity,
+          quantitygte,
+          quantitylte,
+          price,
+          pricegte,
+          pricelte,
+          categories,
+          order,
+          direction,
+          page,
+          platforms,
+          licenses,
+        },
+      });
+      
+
+      if (response.data.rows.length === 0) {
+        // Handle the case when there are no products matching the filters
+        dispatch(setProducts([]));
+      } else {
+        dispatch(setProducts(response.data));
+      }
+    } catch (error) {
+      console.log("ERROR:", error);
+      dispatch(setProducts([])); // Set an empty array if there's an error
+    }
+  };
+};
