@@ -36,6 +36,8 @@ export const ADD_ONE_FROM_CART = "ADD_ONE_FROM_CART";
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 export const GET_All_USERS = 'GET_All_USERS';
+export const SET_CART1 = 'SET_CART1';
+
 
 const URL = 'https://ecommersback-production.up.railway.app'
 
@@ -419,12 +421,12 @@ export function removeFromCart(payload) {
   };
 }
 
-// export const setCart = (cart) => {
-//   return {
-//     type: SET_CART,
-//     payload: cart,
-//   };
-// };
+export const setCart1 = (cart) => {
+  return {
+    type: SET_CART1,
+    payload: cart,
+  };
+};
 
 // export function setCurrentPage(page) {
 //   return {
@@ -629,7 +631,6 @@ export const fetchProducts = (filters) => {
 
 
 export function deleteProduct(id) {
-  console.log('el ide de la action es: ' +id);
   
   return function (dispatch) {
     return axios
@@ -663,7 +664,7 @@ export const getUsers = () => {
 };
 
 export function editUser(bodyFormData, id) {
-  console.log(bodyFormData);
+  
   return function (dispatch) {
     return axios
       .put(`${URL}/users/${id}`, bodyFormData)
@@ -684,6 +685,32 @@ export function editUser(bodyFormData, id) {
       });
   };
 }
+
+
+export function deleteUser(id) {
+  
+  
+  return function (dispatch) {
+    return axios
+      .delete(`${URL}/users/${id}`)
+      .then((res) => {
+        Swal.fire({
+          icon: "success",
+          title: "Modificación",
+          text: `Se ha Deshabilitado el usuario correctamente`,
+        });
+       // getProduct(res.data.id)(dispatch);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Completa todos los datos obligatorios",
+        });
+      });
+  };
+}
+
 ///////////////////
 
 export function mostrarCarrito(id) {
@@ -759,3 +786,4 @@ export function deleteReview( id) {
       .catch(error => alert(error, 'Algo salió mal al borrar la review'))
   }
 }
+

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mostrarCarrito, agregarAlCarrito, quitarProducto } from "../redux/actions/actions";
+import { mostrarCarrito, sume1FromCart, remove1FromCart, removeFromCart, setCart1 } from "../redux/actions/actions";
 import { Link } from "react-router-dom";
-
-
-import * as actions from "../redux/actions/actions";
 import axios from "axios";
 
 import Cookies from "js-cookie";
+
+
 
 function NewCarrito() {
   const [quantity1, setQuantity1] = useState(2);
@@ -24,6 +23,7 @@ function NewCarrito() {
   };
 
   const cart = useSelector((state) => state.cart);
+  
   const price = cart
     .map((ele) => ele.price * ele.quantity)
     .reduce(function (acumulador, elemento) {
@@ -46,33 +46,51 @@ function NewCarrito() {
   const [setMensajeCompra] = useState("");
 
   const eliminarProducto1 = (id) => {
-    dispatch(quitarProducto(id, userId));
+    dispatch(remove1FromCart(id, userId));
   };
 
   const sumarProducto1 = (id) => {
-    // Lógica para incrementar la cantidad de un producto en el carrito
+    dispatch(sume1FromCart(id));
   };
+  
+  
 
   const eliminarProducto = (id) => {
-    dispatch(quitarProducto(id, userId));
+    dispatch(removeFromCart(id, userId));
   };
+
+  useEffect(() => {
+    const getLC = () => {
+      const carLC = JSON.parse(localStorage.getItem('cart')) ?? []  
+      dispatch(setCart1(carLC))
+    }
+    getLC()
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const realizarCompra = async () => {
-    await axios
-      .post("/mercadopago", cart)
-      .then(response => {
-        const { init_point } = response.data;
-        if (init_point) {
-          window.location.href = init_point;
-        }
-      })
-      .catch(error => {
-        console.error("Error al realizar la compra:", error);
-      });
+    try {
+      const response = await axios.post("/mercadopago", cart);
+      const { init_point } = response.data;
+      if (init_point) {
+        window.location.href = init_point;
+  
+        
+        setTimeout(async () => {
+          try {
+            await axios.post("/nodemailer/compra-exitosa", { email: 'example@example.com' });
+            console.log('El segundo axios.post se realizó después de 5 minutos');
+          } catch (error) {
+            console.error("Error al realizar el segundo axios.post:", error);
+          }
+        }, 1 * 60 * 1000); 
+      }
+    } catch (error) {
+      console.error("Error al realizar la compra:", error);
+    }
   };
 
   const getCartId = () => {
