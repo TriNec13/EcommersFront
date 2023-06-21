@@ -103,7 +103,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {sesion ? (
+            {(true && sesion) ? (
               <>
               {console.log("entro en perfil")}
                 <Link to="/infocliente">
