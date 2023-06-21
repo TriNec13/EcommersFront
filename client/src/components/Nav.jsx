@@ -105,6 +105,7 @@ const Nav = () => {
           <div className={styles.PerfilContent}>
             {sesion ? (
               <>
+              {console.log("entro en perfil")}
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
                 </Link>
@@ -119,6 +120,7 @@ const Nav = () => {
               </>
             ) : (
               <Link to="/login">
+                {console.log("no entro en perfil")}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
