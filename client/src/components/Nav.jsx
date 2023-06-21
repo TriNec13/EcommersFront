@@ -16,6 +16,7 @@ const Nav = () => {
   const dispatch = useDispatch();
   const [admin, setAdmin] = useState(false);
   const sesion = localStorage.isLoggedIn;
+  console.log(sesion)
 
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
