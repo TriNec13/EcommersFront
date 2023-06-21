@@ -15,6 +15,7 @@ const Nav = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const dispatch = useDispatch();
   const [admin, setAdmin] = useState(false);
+  const sesion = localStorage.isLoggedIn;
 
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
@@ -100,7 +101,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {isLoggedIn ? (
+            {sesion ? (
               <>
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
@@ -119,7 +120,7 @@ const Nav = () => {
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
-			 {isLoggedIn ? (
+			 {sesion ? (
               (admin && <Link to="/dashboard">
                 <button className={styles.ButtonNav}>Administrador</button>
               </Link>)
