@@ -20,6 +20,7 @@ const Nav = () => {
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
     setIsLoggedIn(false);
+    localStorage.isLoggedIn = false;
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
