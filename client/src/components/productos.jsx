@@ -23,7 +23,6 @@ function Productos() {
   useEffect(() => {
     const getLC = () => {
       const carLC = JSON.parse(localStorage.getItem('cart')) ?? []
-      console.log(carLC);
       dispatch(actions.setCart(carLC))
     }
     getLC()

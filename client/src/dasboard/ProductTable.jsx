@@ -97,7 +97,6 @@ const ProductTable = () => {
   const handleDeleteConfirm = () => {
     const { id } = selectedProduct;
     dispatch(deleteProduct(id));
-    console.log(selectedProduct);
     setDeleteModalOpen(false);
   };
 

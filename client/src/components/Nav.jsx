@@ -62,7 +62,7 @@ const Nav = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
-  
+  console.log("Nav: ", localStorage)
   return (
     <div className={styles.Nav}>
       <div className={styles.DivLogo}>

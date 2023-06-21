@@ -55,7 +55,6 @@ export default function FormNewProduct({ setAddModalOpen }) {
           licenses: [],
         },
       });
-      //console.log(updatedValues);
       Swal.fire({
         text: "Se ha agregado el producto",
         icon: "success",
