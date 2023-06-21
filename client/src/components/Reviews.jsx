@@ -39,6 +39,7 @@ export default function Review(props) {
         dispatch(deleteReview(beer, id));
     
     }
+   console.log("aaaaaaaaaaaaaaaa", props);
     return (
         <div>
             <div className="card text-white bg-dark mb-3" style={{ width: "300px" }}>

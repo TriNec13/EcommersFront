@@ -15,13 +15,10 @@ const Nav = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const dispatch = useDispatch();
   const [admin, setAdmin] = useState(false);
-  const sesion = localStorage.isLoggedIn;
-  console.log(sesion)
 
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
     setIsLoggedIn(false);
-    localStorage.isLoggedIn = false;
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
@@ -63,7 +60,7 @@ const Nav = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
-  console.log("Nav: ", localStorage)
+  
   return (
     <div className={styles.Nav}>
       <div className={styles.DivLogo}>
@@ -103,9 +100,8 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {(sesion &&
+            {isLoggedIn ? (
               <>
-              {console.log("entro en perfil")}
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
                 </Link>
@@ -118,13 +114,12 @@ const Nav = () => {
                   </button>
                 </Link>
               </>
-            )  ( !sesion &&
+            ) : (
               <Link to="/login">
-                {console.log("no entro en perfil")}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
-			 {sesion ? (
+			 {isLoggedIn ? (
               (admin && <Link to="/dashboard">
                 <button className={styles.ButtonNav}>Administrador</button>
               </Link>)

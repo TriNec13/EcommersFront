@@ -19,6 +19,7 @@ const SubirImagen = ({ handleSave, setProfilePicture }) => {
       const imageURL = response.data.secure_url;
       setImage(imageURL);
       setProfilePicture(imageURL); // Actualizar el estado de la imagen en InfoCliente
+      console.log('URL de la imagen cargada:', imageURL);
       handleSave(imageURL); // Guardar la imagen en el backend
     } catch (error) {
       console.error('Error al subir la imagen:', error);

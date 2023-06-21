@@ -163,7 +163,7 @@ export function editProduct(bodyFormData, id) {
 export function addUser(payload, email) {
   var url = URL + "/auth/signup";
   return function (dispatch) {
-    axios
+    return axios
       .post(url, payload, {
         headers: {
           "Content-Type": "application/json",
@@ -180,12 +180,14 @@ export function addUser(payload, email) {
             icon: "error",
             timer: "2000",
           });
+          return { success: false }; 
         } else {
           Swal.fire({
             text: "Se ha creado el usuario exitosamente, ahora haga click en el boton iniciar sesion para disfrutar de CodeXpress",
             icon: "success",
             timer: "2000",
           });
+          return { success: true, data: response.data };
         }
       })
       .catch((error) => {
@@ -194,6 +196,7 @@ export function addUser(payload, email) {
           icon: "error",
           timer: "2000",
         });
+        return { success: false };
       });
   };
 }
@@ -766,6 +769,7 @@ export function quitarProducto(productId, id) {
 export function getReviews(id) {
   return function (dispatch) {
     const url = `/reviews?productId=${id}`;
+    console.log(id + " actions")
     return axios.get(url)
       .then(res => res.data)
       .then(data => {
@@ -776,7 +780,7 @@ export function getReviews(id) {
 
 export function deleteReview( id) {
   return function (dispatch) {
-    const url = `http://localhost:3001/review/${id}`;
+    const url = `${URL}/review/${id}`;
     return axios.delete(url)
         .then(data => {
           dispatch({ type:DELETE_REVIEW , payload: id });

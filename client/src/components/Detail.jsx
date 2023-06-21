@@ -36,6 +36,7 @@ export default function Detail() {
       try {
         const response = await axios.get(`/reviews?productId=${id}`);
         setReviews(response.data.rows);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
@@ -63,6 +64,7 @@ export default function Detail() {
       });
       throw error;
     }
+    console.log()
   };
 
   // const deleteReview = (reviewId) => {

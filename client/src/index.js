@@ -8,6 +8,7 @@ import store from './redux/Store';
 import axios from 'axios';
 import { AuthProvider } from './components/AuthContext';
 
+
 axios.defaults.baseURL = 'https://ecommersback-production.up.railway.app';
 
 const rootElement = document.getElementById('root');
@@ -25,7 +26,6 @@ ReactDOM.createRoot(rootElement).render(
 );
 
 serviceWorker.unregister();
-
 
 
 // If you want your app to work offline and load faster, you can change
