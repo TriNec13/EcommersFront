@@ -47,7 +47,7 @@ const Carrito = () => {
     dispatch(removeFromCart(id));
   };
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", tringify(cart));
   }, [cart]);
 
   const mostrarFormularioEmergente = () => {

@@ -71,7 +71,7 @@ function NewCarrito() {
 
         setTimeout(async () => {
           try {
-            await axios.post("/nodemailer/compra-exitosa", {email: Cookies.get("email") });
+            await axios.post("/nodemailer/compra-exitosa", {email: localStorage.get("email") });
             console.log('El segundo axios.post se realizó después de 1 minutos');
           } catch (error) {
             console.error("Error al realizar el segundo axios.post:", error);
@@ -83,20 +83,6 @@ function NewCarrito() {
     }
   };
 
-  const getCartId = () => {
-    let cartId = Cookies.get("cartId");
-    if (!cartId) {
-      cartId = generateCartId();
-      Cookies.set("cartId", cartId);
-    }
-    return cartId;
-  };
-
-  const generateCartId = () => {
-    // Lógica para generar una identificación única del carrito
-    // Puedes utilizar un UUID o cualquier otro método de generación de identificadores únicos
-    return "id del carrito";
-  };
   
   return (
     <div className="h-screen bg-gray-100 pt-20">
