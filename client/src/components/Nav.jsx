@@ -15,9 +15,10 @@ const Nav = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [admin, setAdmin] = useState(false);
   const dispatch = useDispatch();
+  const [login, setLogin] = useState("");
 
   const handleLogout = () => {
-    dispatch(actions.logoutUser)
+    dispatch(actions.logoutUser);
     navigate("/login");
   };
   useEffect(() => {
@@ -31,24 +32,29 @@ const Nav = () => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
 
-
   const handleRefrescar = () => {
     pathname === "/home" && window.location.reload();
   };
 
+  const cookieString = document.cookie;
+  const tokenCookie = cookieString
+    .split(";")
+    .find((cookie) => cookie.trim().startsWith("login="));
+  const token = tokenCookie.split("=")[1];
+
   const cookiesUsers = async () => {
     try {
-      const response = await axios.get("/auth/user", {
-        withCredentials: true,
-      });
-      setAdmin(response.data.user.admin);
+      const response = await axios.post("/auth/user", { token: token });
+      const admin = response.data.user.admin;
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    console.log("cookies: ",cookiesUsers())
+    if (tokenCookie) {
+      setLogin(true);
+    }
     cookiesUsers();
   }, []);
 
@@ -91,7 +97,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {localStorage.isLoggedIn === "true" ? (
+            {login === "true" ? (
               <>
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>

@@ -5,7 +5,7 @@ import styles from "../css/Home.module.css";
 import Pagination from "../components/Pagination";
 const Home = () => {
   const [showCarousel, setShowCarousel] = useState(false);
-  console.log("LS Home",localStorage)
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
