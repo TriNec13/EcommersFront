@@ -20,6 +20,7 @@ const InfoCliente = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
 
   const id = userData?.id;
 
@@ -75,7 +76,7 @@ const InfoCliente = () => {
   };
 
   const handleOldPasswordChange = (e) => {
-    setCurrentPassword(e.target.value);
+    setOldPassword(e.target.value);
   };
 
   const handleNewPasswordChange = (e) => {
@@ -115,34 +116,28 @@ const InfoCliente = () => {
   };
 
   const savePass = async () => {
-    if (await isCurrentPasswordValid()) {
-      if (newPassword === confirmPassword) {
-        try {
-          await axios.put(`/user/${id}`, {
-            email: userData.email,
-            oldPassword: newPassword,
-            newPassword: confirmPassword,
-          });
-          disableEditing();
-        } catch (error) {
-          console.error(error);
-        }
-      } else {
-        console.log("Las contraseñas no coinciden");
+    if (newPassword === confirmPassword) {
+      try {
+        await axios.put(`/user/${id}`, {
+          email: userData.email,
+          oldPassword: oldPassword,
+          newPassword: confirmPassword,
+        });
+        disableEditing();
+      } catch (error) {
+        console.error(error);
       }
     } else {
-      console.log("La contraseña actual es incorrecta");
+      console.log("Las contraseñas no coinciden");
     }
-  };
+  };  
 
   const isPasswordValid = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return passwordRegex.test(newPassword);
   };
 
-  const isCurrentPasswordValid = () => {
-    return currentPassword === userData.password;
-  };
+  
 
   return (
     <div className={styles.General}>
