@@ -21,7 +21,7 @@ const CompraCliente = () => {
   }
   // const id = localStorage.getItem(JSON.parse(userData))
 
-  console.log(user);
+  console.log(userData.id);
   console.log(userData)
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const CompraCliente = () => {
     const reviewData = {
       rating: review[producto.id].rating,
       description: review[producto.id].description,
-      userId: user,
+      userId: userData.id,
       productId: producto.id,
     };
     dispatch(actions.addReview(reviewData));
