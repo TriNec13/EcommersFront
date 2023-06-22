@@ -16,10 +16,8 @@ const InfoCliente = () => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [admin, setAdmin] = useState("");
-  const [pass, setPass] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
 
   const id = userData?.id;
@@ -118,7 +116,7 @@ const InfoCliente = () => {
   const savePass = async () => {
     if (newPassword === confirmPassword) {
       try {
-        await axios.put(`/user/${id}`, {
+        await axios.put(`/user`, {
           email: userData.email,
           oldPassword: oldPassword,
           newPassword: confirmPassword,
@@ -205,7 +203,7 @@ const InfoCliente = () => {
               <Link to="/compracliente">
                 {!editing && !editpass && <button>Mis Compras</button>}
               </Link>
-              {admin && (
+              {admin && !editing && !editpass && (
                   <Link to="/dashboard">
                     <button className={styles.ButtonNav}>Administrador</button>
                   </Link>
