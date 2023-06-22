@@ -23,6 +23,7 @@ const InfoCliente = () => {
   const id = userData?.id;
 
   const token = document.cookie.login;
+  console.log("esto es token: ",token)
 
   axios.post('/user', token)
   .then(response => {
