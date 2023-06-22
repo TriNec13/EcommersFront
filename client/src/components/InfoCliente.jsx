@@ -117,6 +117,7 @@ const InfoCliente = () => {
     if (newPassword === confirmPassword) {
       try {
         await axios.put(`/user`, {
+          token: token,
           email: userData.email,
           oldPassword: oldPassword,
           newPassword: confirmPassword,
