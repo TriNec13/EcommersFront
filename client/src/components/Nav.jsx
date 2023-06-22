@@ -18,7 +18,7 @@ const Nav = () => {
   const [login, setLogin] = useState("");
 
   const handleLogout = () => {
-    dispatch(actions.logoutUser);
+    dispatch(actions.logoutUser());
     navigate("/login");
   };
   useEffect(() => {
