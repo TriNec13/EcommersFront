@@ -102,7 +102,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {isLoggedIn ? (
+            {localStorage.isLoggedIn ? (
               <>
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
@@ -121,7 +121,7 @@ const Nav = () => {
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
-			 {isLoggedIn ? (
+			 {localStorage.isLoggedIn ? (
               (admin && <Link to="/dashboard">
                 <button className={styles.ButtonNav}>Administrador</button>
               </Link>)
