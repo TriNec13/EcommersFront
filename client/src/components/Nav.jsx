@@ -19,18 +19,16 @@ const Nav = () => {
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
     setIsLoggedIn(false);
-    console.log("primero de isLoggedIn", localStorage.isLoggedIn);
     localStorage.setItem("isLoggedIn", false);
-    console.log("segundo de isLoggedIn", localStorage.isLoggedIn);
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
-  useEffect(() => {
-    const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
-    if (storedLoggedInStatus) {
-      setIsLoggedIn(JSON.parse(storedLoggedInStatus));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
+  //   if (storedLoggedInStatus) {
+  //     setIsLoggedIn(JSON.parse(storedLoggedInStatus));
+  //   }
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
@@ -63,8 +61,7 @@ const Nav = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
-  console.log("LS NAV", localStorage);
-  console.log("LS NAV Bandera", localStorage.isLoggedIn);
+
   return (
     <div className={styles.Nav}>
       <div className={styles.DivLogo}>
@@ -106,10 +103,6 @@ const Nav = () => {
           <div className={styles.PerfilContent}>
             {localStorage.isLoggedIn === "true" ? (
               <>
-                {console.log(
-                  "este console es dentro de perfil",
-                  localStorage.isLoggedIn
-                )}
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
                 </Link>
@@ -124,10 +117,6 @@ const Nav = () => {
               </>
             ) : (
               <Link to="/login">
-                {console.log(
-                  "este console es fuera de perfil",
-                  localStorage.isLoggedIn
-                )}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}

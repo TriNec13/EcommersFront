@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import style from "../css/Login.module.css";
 import LogoClaro from "../img/LogoClaro.png";
 import Google from "../img/Google.png";
-import Apple from "../img/AppleLogin.png";
-import Microsoft from "../img/Microsoft.png";
+// import Apple from "../img/AppleLogin.png";
+// import Microsoft from "../img/Microsoft.png";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from '../components/Nav';
 import GoogleLoginButton from "../components/GoogleLoginButton";
@@ -31,36 +31,31 @@ export function Login() {
   };
 
   const SubmitUser = (e) => {
-    console.log("primero de isLoggedIn en login", localStorage.isLoggedIn)
     localStorage.setItem('isLoggedIn', true);
-    console.log("segundo de isLoggedIn en login", localStorage.isLoggedIn)
     iniciarSesion({
       email: "",
       password: "",
     });
   };
 
-useEffect(() => {
-  const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
-  if (storedLoggedInStatus) {
-    setIsLoggedIn(JSON.parse(storedLoggedInStatus));
-  }
-}, []);
+// useEffect(() => {
+//   const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
+//   if (storedLoggedInStatus) {
+//     setIsLoggedIn(JSON.parse(storedLoggedInStatus));
+//   }
+// }, []);
 
   const handleSubmit = async (event, state) => {
     event.preventDefault();
     const loginExitoso = await loginUser(state);
     if (loginExitoso) {
       setIsLoggedIn(true);
-      console.log("bandera paso a true: ",isLoggedIn) 
       navigate("/Home");
     } else {
       // nada XD
     }
   };
 
-  console.log("este es la bandera: ",isLoggedIn)
-  console.log("LS Login",localStorage)
   return (
     <div className={style.General}>
       {isLoggedIn && <Nav />}
