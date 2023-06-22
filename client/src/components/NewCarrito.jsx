@@ -6,8 +6,6 @@ import axios from "axios";
 
 import Cookies from "js-cookie";
 
-console.log("esto es cookies: ",Cookies.userId)
-
 function NewCarrito() {
   const [quantity1, setQuantity1] = useState(2);
   const [quantity2, setQuantity2] = useState(2);
@@ -99,7 +97,7 @@ function NewCarrito() {
     // Puedes utilizar un UUID o cualquier otro método de generación de identificadores únicos
     return "id del carrito";
   };
-
+  console.log("esto es cookies: ",Cookies.userId)
   return (
     <div className="h-screen bg-gray-100 pt-20">
       <h1 className="mb-10 text-center text-2xl font-bold">Carro de Compra</h1>
