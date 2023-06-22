@@ -243,11 +243,6 @@ const InfoCliente = () => {
                       al menos una letra y un número.
                     </p>
                   )}
-                  {!isCurrentPasswordValid() && (
-                    <p className={styles.ErrorMessage}>
-                      La contraseña actual es incorrecta.
-                    </p>
-                  )}
                   <div className={styles.BotonesPass}>
                     <button onClick={savePass}>Guardar</button>
                     <button onClick={disablePass}>Cancelar</button>
