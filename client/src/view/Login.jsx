@@ -48,7 +48,8 @@ useEffect(() => {
     event.preventDefault();
     const loginExitoso = await loginUser(state);
     if (loginExitoso) {
-      setIsLoggedIn(true); 
+      setIsLoggedIn(true);
+      console.log("bandera paso a true: ",isLoggedIn) 
       navigate("/Home");
     } else {
       // nada XD
