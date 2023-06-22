@@ -74,6 +74,10 @@ const InfoCliente = () => {
     setEditpass(false);
   };
 
+  const handleOldPasswordChange = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
   const handleNewPasswordChange = (e) => {
     setNewPassword(e.target.value);
   };
@@ -114,9 +118,10 @@ const InfoCliente = () => {
     if (await isCurrentPasswordValid()) {
       if (newPassword === confirmPassword) {
         try {
-          await axios.put(`/users/${id}`, {
+          await axios.put(`/user/${id}`, {
             email: userData.email,
-            password: pass,
+            oldPassword: newPassword,
+            newPassword: confirmPassword,
           });
           disableEditing();
         } catch (error) {
@@ -223,19 +228,19 @@ const InfoCliente = () => {
                   <input
                     type="text"
                     placeholder="Contraseña Actual"
-                    onChange={handleNameChange}
+                    onChange={handleOldPasswordChange}
                   />
                   <h2>Contraseña Nueva:</h2>
                   <input
                     type="text"
                     placeholder="Contraseña Nueva"
-                    onChange={handleLastNameChange}
+                    onChange={handleNewPasswordChange}
                   />
                   <h2>Repetir:</h2>
                   <input
                     type="text"
                     placeholder="Contraseña Nueva"
-                    onChange={handlePhoneChange}
+                    onChange={handleConfirmPasswordChange}
                   />
                   {!isPasswordValid() && (
                     <p className={styles.ErrorMessage}>
@@ -249,7 +254,7 @@ const InfoCliente = () => {
                     </p>
                   )}
                   <div className={styles.BotonesPass}>
-                    <button>Guardar</button>
+                    <button onClick={savePass}>Guardar</button>
                     <button onClick={disablePass}>Cancelar</button>
                   </div>
                 </div>
