@@ -19,9 +19,9 @@ const Nav = () => {
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
     setIsLoggedIn(false);
-    console.log("primero de isLoggedIn", localStorage.isLoggedIn)
-    localStorage.setItem('isLoggedIn', false);
-    console.log("segundo de isLoggedIn", localStorage.isLoggedIn)
+    console.log("primero de isLoggedIn", localStorage.isLoggedIn);
+    localStorage.setItem("isLoggedIn", false);
+    console.log("segundo de isLoggedIn", localStorage.isLoggedIn);
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
@@ -63,8 +63,8 @@ const Nav = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
-  console.log("LS NAV",localStorage)
-  console.log("LS NAV Bandera",localStorage.isLoggedIn)
+  console.log("LS NAV", localStorage);
+  console.log("LS NAV Bandera", localStorage.isLoggedIn);
   return (
     <div className={styles.Nav}>
       <div className={styles.DivLogo}>
@@ -104,9 +104,13 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {(localStorage.isLoggedIn &&
+            if (localStorage.isLoggedIn == true){" "}
+            {
               <>
-                {console.log("este console es dentro de perfile",localStorage.isLoggedIn)}
+                {console.log(
+                  "este console es dentro de perfile",
+                  localStorage.isLoggedIn
+                )}
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
                 </Link>
@@ -119,17 +123,24 @@ const Nav = () => {
                   </button>
                 </Link>
               </>
-            )} {(!localStorage.isLoggedIn &&
+            }{" "}
+            else{" "}
+            {
               <Link to="/login">
-                {console.log("este console es fuera de perfile",localStorage.isLoggedIn)}
+                {console.log(
+                  "este console es fuera de perfile",
+                  localStorage.isLoggedIn
+                )}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
-            )}
-			 {localStorage.isLoggedIn ? (
-              (admin && <Link to="/dashboard">
-                <button className={styles.ButtonNav}>Administrador</button>
-              </Link>)
-            ) : null}
+            }
+            {localStorage.isLoggedIn
+              ? admin && (
+                  <Link to="/dashboard">
+                    <button className={styles.ButtonNav}>Administrador</button>
+                  </Link>
+                )
+              : null}
           </div>
         </div>
       </div>
