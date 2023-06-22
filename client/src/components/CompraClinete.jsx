@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../css/CompraCliente.module.css";
 import * as actions from "../redux/actions/actions";
-import axios from "axios";
 
 const CompraCliente = () => {
   const [review, setReview] = useState({});
@@ -10,12 +9,18 @@ const CompraCliente = () => {
   //const [userData, setUserData] = useState({});
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
- 
-  const userDataString = localStorage.getItem('userData');
-  const userData = JSON.parse(userDataString);
+
+  let user = null;
+  const userDataString = localStorage.getItem("userData");
+  if (userDataString !== null && userDataString !== undefined) {
+    const userData = JSON.parse(userDataString);
+    user = userData.userId;
+  } else {
+    console.log();
+  }
   // const id = localStorage.getItem(JSON.parse(userData))
-  const userId = userData.userId;
-  console.log(userId)
+
+  console.log(user);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -44,7 +49,7 @@ const CompraCliente = () => {
     const reviewData = {
       rating: review[producto.id].rating,
       description: review[producto.id].description,
-      userId: userId,
+      userId: user,
       productId: producto.id,
     };
     dispatch(actions.addReview(reviewData));
