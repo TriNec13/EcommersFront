@@ -6,7 +6,7 @@ import axios from "axios";
 
 import Cookies from "js-cookie";
 
-
+console.log("esto es cookies: ",Cookies)
 
 function NewCarrito() {
   const [quantity1, setQuantity1] = useState(2);
@@ -36,14 +36,6 @@ function NewCarrito() {
     const userId = "..." // Obtén el ID del usuario actual
     dispatch(mostrarCarrito(userId));
   }, [dispatch]);
-
-
-  const [nombre] = useState("");
-  const [dni] = useState("");
-  const [telefono] = useState("");
-  const [direccion] = useState("");
-  const [codigoPostal] = useState("");
-  const [setMensajeCompra] = useState("");
 
   const eliminarProducto1 = (id) => {
     dispatch(remove1FromCart(id, userId));
