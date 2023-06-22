@@ -7,13 +7,15 @@ import axios from "axios";
 const CompraCliente = () => {
   const [review, setReview] = useState({});
   const [showForm, setShowForm] = useState({});
-  const [userData, setUserData] = useState({});
+  //const [userData, setUserData] = useState({});
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
  
-
-  const id = localStorage.getItem(JSON.parse(userData))
-  console.log(id)
+  const userDataString = localStorage.getItem('userData');
+  const userData = JSON.parse(userDataString);
+  // const id = localStorage.getItem(JSON.parse(userData))
+  const userId = userData.userId;
+  console.log(userId)
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -42,7 +44,7 @@ const CompraCliente = () => {
     const reviewData = {
       rating: review[producto.id].rating,
       description: review[producto.id].description,
-      userId: id,
+      userId: userId,
       productId: producto.id,
     };
     dispatch(actions.addReview(reviewData));
