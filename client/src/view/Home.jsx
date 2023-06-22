@@ -18,7 +18,7 @@ const Home = () => {
     <div>
       <div className={styles.Carousel}>
         <div className={styles.subCarousel}>
-          <h1 onClick={toggleCarousel}>→ → Destacados de la semana ← ←</h1>
+          {/* <h1 onClick={toggleCarousel}>→ → Destacados de la semana ← ←</h1> */}
           {showCarousel && <Carousel />}
         </div>
       </div>
