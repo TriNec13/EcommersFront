@@ -19,7 +19,9 @@ const Nav = () => {
   const handleLogout = () => {
     // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
     setIsLoggedIn(false);
+    console.log("primero de isLoggedIn", localStorage.isLoggedIn)
     localStorage.setItem('isLoggedIn', false);
+    console.log("segundo de isLoggedIn", localStorage.isLoggedIn)
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
@@ -103,7 +105,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {localStorage.isLoggedIn ? (
+            {!localStorage.isLoggedIn ? (
               <>
                 {console.log("este console es dentro de perfile",localStorage.isLoggedIn)}
                 <Link to="/infocliente">
