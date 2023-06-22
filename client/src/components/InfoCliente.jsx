@@ -34,6 +34,10 @@ const InfoCliente = () => {
     .post("/auth/user", { token: token })
     .then((response) => {
       console.log("respuesta del post ", response.data);
+      setUserData(response.data.user);
+      setName(response.data.user.name);
+      setLastName(response.data.user.last_name);
+      setPhoneNumber(response.data.user.phone);
     })
     .catch((error) => {
       console.error(error);
