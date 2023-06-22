@@ -142,9 +142,9 @@ const InfoCliente = () => {
           title: "Modificación",
           text: "Se modificó correctamente",
         });
-        console.log(editing)
-        setEditing(false);
-        console.log(editing)
+        console.log(editpass)
+        setEditpass(false);
+        console.log(editpass)
         disableEditing();
       } catch (error) {
         Swal.fire({
