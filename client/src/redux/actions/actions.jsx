@@ -272,6 +272,7 @@ export const logoutUser = () => {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 2000,
         });
+        window.location.reload();
       })
       .catch((error) => {
         toast.error('Error al cerrar sesión', {

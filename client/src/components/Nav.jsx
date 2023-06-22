@@ -19,7 +19,6 @@ const Nav = () => {
 
   const handleLogout = () => {
     dispatch(actions.logoutUser());
-    window.location.reload();
   };
   useEffect(() => {
     const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
