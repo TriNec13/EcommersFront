@@ -5,10 +5,14 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const logout = () => {
-    setIsLoggedIn(false);
-    // otras acciones de cierre de sesión si es necesario
-  };
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setIsLoggedIn(true);
+    }else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   useEffect(() => {
     // Actualizar el localStorage cuando isLoggedIn cambie
@@ -24,7 +28,6 @@ export function AuthProvider({ children }) {
   const authContextValue = {
     isLoggedIn,
     setIsLoggedIn,
-    logout,
   };
 
   return (

@@ -6,19 +6,19 @@ import Carrito from "../img/Carrito.png";
 import IconoUser from "../img/IconoUser.png";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
+import * as actions from "../redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 const Nav = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [admin, setAdmin] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    // Aquí puedes realizar la lógica de cierre de sesión, como limpiar las variables de sesión, etc.
-    setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", false);
-    navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
-    // logoutUser();
+    dispatch(actions.logoutUser)
+    navigate("/login");
   };
   useEffect(() => {
     const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
