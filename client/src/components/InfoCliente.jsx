@@ -204,12 +204,12 @@ const InfoCliente = () => {
             <div className={styles.Botones}>
               <Link to="/compracliente">
                 {!editing && !editpass && <button>Mis Compras</button>}
-                {admin && (
+              </Link>
+              {admin && (
                   <Link to="/dashboard">
                     <button className={styles.ButtonNav}>Administrador</button>
                   </Link>
                 )}
-              </Link>
               {!editing && !editpass && (
                 <div className={styles.Contraseña}>
                   <button onClick={enablePass}>
