@@ -6,7 +6,7 @@ import axios from "axios";
 
 import Cookies from "js-cookie";
 
-console.log("esto es cookies: ",Cookies)
+console.log("esto es cookies: ",Cookies.userId)
 
 function NewCarrito() {
   const [quantity1, setQuantity1] = useState(2);
