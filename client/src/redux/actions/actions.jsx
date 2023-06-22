@@ -18,7 +18,7 @@ import {
   SET_CATEGORIES,
   SET_PRODUCTS,
   VIEW_REVIEW,
-  DELETE_REVIEW,
+  ADD_REVIEW,
 } from "../consts";
 import { toast } from 'react-toastify';
 import axios from "axios";
@@ -781,15 +781,28 @@ export function getReviews(id) {
   }
 }
 
-export function deleteReview( id) {
+export function addReview(reviewData) {
   return function (dispatch) {
-    const url = `${URL}/review/${id}`;
-    return axios.delete(url)
-        .then(data => {
-          dispatch({ type:DELETE_REVIEW , payload: id });
-        })
-      .then(() => alert('Se borro la review'))
-      .catch(error => alert(error, 'Algo salió mal al borrar la review'))
-  }
+    const url = '/reviews';
+    return axios.post(url, reviewData)
+      .then(data => {
+        dispatch({ type: ADD_REVIEW, payload: data });
+        Swal.fire({
+          icon: "success",
+          title: "Modificación",
+          text: "Se modificó el producto correctamente",
+        });
+      })
+      .catch((error) => {
+        let errorMessage = "Ha ocurrido un error";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorMessage,
+        });
+      });
+  };
 }
-
