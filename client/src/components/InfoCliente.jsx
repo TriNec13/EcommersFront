@@ -26,7 +26,7 @@ const InfoCliente = () => {
 
   axios.post('/user', token)
   .then(response => {
-    console.log(response.data);
+    console.log("respuesta del post ",response.data);
   })
   .catch(error => {
     console.error(error);
@@ -37,7 +37,6 @@ const InfoCliente = () => {
       const response = await axios.get("/auth/user", {
         withCredentials: true,
       });
-      console.log("esto es response",response)
       setUserData(response.data.user);
       setName(response.data.user.name);
       setLastName(response.data.user.last_name);
