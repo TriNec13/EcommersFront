@@ -22,6 +22,8 @@ const InfoCliente = () => {
 
   const id = userData?.id;
 
+  console.log(document.cookie) 
+
   const cookiesUsers = async () => {
     try {
       const response = await axios.get("/auth/user", {
