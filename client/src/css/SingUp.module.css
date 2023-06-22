@@ -132,13 +132,12 @@
 
 .DivBotones {
 	display: flex;
-	justify-content: space-between;
-	padding: 0 10%;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	margin-top: 15%;
 }
 
-.DivBotones button {
+.DivBotonesbutton {
 	gap: 10px;
 	background: #d8dbfb;
 	border-radius: 6px;
@@ -149,4 +148,21 @@
 	line-height: 30px;
 	color: #1c1934;
 	padding: 0.2em 0.5em;
+	margin-top: 10%;
+}
+
+.DivBotones p {
+	margin-top: 10%;
+}
+
+.BotonLogin {
+	background: none;
+	color: white;
+	margin-top: 1em;
+}
+
+.BotonLogin:hover {
+	color: #14396A;
+	background: #468CCF;
+	background: linear-gradient(to top, #468CCF, #63B8EE);
 }
