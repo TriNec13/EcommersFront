@@ -783,7 +783,6 @@ export function getReviews(id) {
 export function addReview(reviewData) {
   return function (dispatch) {
     const url = '/reviews';
-    console.log("reviewData ", reviewData)
     return axios.post(url, reviewData)
       .then(data => {
         dispatch({ type: ADD_REVIEW, payload: data });

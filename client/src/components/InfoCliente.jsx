@@ -135,7 +135,7 @@ const InfoCliente = () => {
         console.log("email: ",userData.email)
         console.log("oldPassword: ",oldPassword)
         console.log("newPassword: ",confirmPassword)
-        await axios.put(`/user`, {
+        await axios.put(`/auth/user`, {
           token: token,
           email: userData.email,
           oldPassword: oldPassword,
