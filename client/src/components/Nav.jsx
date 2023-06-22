@@ -104,11 +104,10 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            if (localStorage.isLoggedIn == true){" "}
-            {
+            {localStorage.isLoggedIn === "true" ? (
               <>
                 {console.log(
-                  "este console es dentro de perfile",
+                  "este console es dentro de perfil",
                   localStorage.isLoggedIn
                 )}
                 <Link to="/infocliente">
@@ -123,17 +122,15 @@ const Nav = () => {
                   </button>
                 </Link>
               </>
-            }{" "}
-            else{" "}
-            {
+            ) : (
               <Link to="/login">
                 {console.log(
-                  "este console es fuera de perfile",
+                  "este console es fuera de perfil",
                   localStorage.isLoggedIn
                 )}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
-            }
+            )}
             {localStorage.isLoggedIn
               ? admin && (
                   <Link to="/dashboard">
