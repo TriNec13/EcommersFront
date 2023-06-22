@@ -38,12 +38,12 @@ export function Login() {
     });
   };
 
-// useEffect(() => {
-//   const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
-//   if (storedLoggedInStatus) {
-//     setIsLoggedIn(JSON.parse(storedLoggedInStatus));
-//   }
-// }, []);
+useEffect(() => {
+  const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
+  if (storedLoggedInStatus) {
+    setIsLoggedIn(JSON.parse(storedLoggedInStatus));
+  }
+}, []);
 
   const handleSubmit = async (event, state) => {
     event.preventDefault();

@@ -23,12 +23,12 @@ const Nav = () => {
     navigate("/login"); // Redireccionar al usuario a la página de inicio de sesión
     // logoutUser();
   };
-  // useEffect(() => {
-  //   const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
-  //   if (storedLoggedInStatus) {
-  //     setIsLoggedIn(JSON.parse(storedLoggedInStatus));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
+    if (storedLoggedInStatus) {
+      setIsLoggedIn(JSON.parse(storedLoggedInStatus));
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
