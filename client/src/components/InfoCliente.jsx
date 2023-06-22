@@ -22,7 +22,15 @@ const InfoCliente = () => {
 
   const id = userData?.id;
 
-  console.log(document.cookie) 
+  const token = document.cookie.login;
+
+  axios.post('/user', token)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 
   const cookiesUsers = async () => {
     try {
