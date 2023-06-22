@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../css/CompraCliente.module.css";
 import * as actions from "../redux/actions/actions";
-import Cookies from "js-cookie";
+import axios from "axios";
 
 const CompraCliente = () => {
   const [review, setReview] = useState({});
