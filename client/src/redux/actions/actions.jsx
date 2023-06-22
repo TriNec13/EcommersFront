@@ -23,6 +23,7 @@ import {
 import { toast } from 'react-toastify';
 import axios from "axios";
 import Swal from "sweetalert2";
+import { object } from "yup";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const SIGN_IN = "SIGN_IN";
@@ -240,9 +241,10 @@ export const loginUser = async (payload) => {
         withCredentials: true
       }
     );
-    document.cookie = `login=${response.token}`
-    console.log("document ",document.cookie)
-    console.log("response: ", response.token)
+    console.log("esto es response de acitions: ", response)
+    const {token} = response
+    console.log("esto es token: ", token)
+    document.cookie = `login=${token}`
     localStorage.setItem("user", JSON.stringify(response.data));
     Swal.fire({
       text: "Ha iniciado sesión correctamente",
