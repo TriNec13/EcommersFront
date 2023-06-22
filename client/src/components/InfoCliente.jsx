@@ -28,8 +28,6 @@ const InfoCliente = () => {
     .find((cookie) => cookie.trim().startsWith("login="));
   const token = tokenCookie.split("=")[1];
 
-  console.log(token);
-
   const cookiesUsers = async () => {
     try {
       const response = await axios.post("/auth/user", { token: token });
@@ -41,33 +39,6 @@ const InfoCliente = () => {
       console.error(error);
     }
   };
-  
-  // axios
-  //   .post("/auth/user", { token: token })
-  //   .then((response) => {
-  //     console.log("respuesta del post ", response.data);
-  //     setUserData(response.data.user);
-  //     setName(response.data.user.name);
-  //     setLastName(response.data.user.last_name);
-  //     setPhoneNumber(response.data.user.phone);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-  // const cookiesUsers = async () => {
-  //   try {
-  //     const response = await axios.get("/auth/user", {
-  //       withCredentials: true,
-  //     });
-  //     setUserData(response.data.user);
-  //     setName(response.data.user.name);
-  //     setLastName(response.data.user.last_name);
-  //     setPhoneNumber(response.data.user.phone);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   useEffect(() => {
     cookiesUsers();
