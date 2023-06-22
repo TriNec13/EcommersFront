@@ -9,28 +9,10 @@ const CompraCliente = () => {
   const [showForm, setShowForm] = useState({});
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState(null);
+ 
 
-  const id = userData?.id;
-
-  const cookieString = document.cookie;
-  const tokenCookie = cookieString
-    .split(";")
-    .find((cookie) => cookie.trim().startsWith("login="));
-  const token = tokenCookie.split("=")[1];
-
-  const cookiesUsers = async () => {
-    try {
-      const response = await axios.post("/auth/user", { token: token });
-      setUserData(response.data.user);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    cookiesUsers();
-  }, []);
+  const id = localStorage.getItem("userData=id")
+  console.log(id)
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
