@@ -55,7 +55,8 @@ useEffect(() => {
     }
   };
 
-
+  console.log("este es la bandera: ",isLoggedIn)
+  console.log("LS Login",localStorage)
   return (
     <div className={style.General}>
       {isLoggedIn && <Nav />}

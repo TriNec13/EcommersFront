@@ -60,7 +60,8 @@ const Nav = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
-  
+  console.log("LS Login",localStorage)
+  console.log("este es la bandera nav: ",isLoggedIn)
   return (
     <div className={styles.Nav}>
       <div className={styles.DivLogo}>
