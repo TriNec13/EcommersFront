@@ -23,7 +23,7 @@ const NewForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/products",
+        "/products",
         values
       );
       Swal.fire({

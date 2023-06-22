@@ -2,7 +2,7 @@ import React from "react";
 
 const GoogleLoginButton = ({ className, children }) => {
   const handleGoogleSignIn = () => {
-    window.location.href = "http://localhost:3001/auth/google";
+    window.location.href = "https://ecommersback-production.up.railway.app/auth/google";
   };
 
   return (

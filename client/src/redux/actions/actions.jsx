@@ -658,7 +658,7 @@ export function deleteProduct(id) {
 
 export const getUsers = () => {
   return async (dispatch) => {
-    const response = (await axios("http://localhost:3001/users")).data;
+    const response = (await axios(`${URL}/users`)).data;
     return dispatch({
       type: GET_All_USERS,
       payload: response,
