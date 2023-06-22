@@ -67,16 +67,16 @@ function NewCarrito() {
       const { init_point } = response.data;
       if (init_point) {
         window.location.href = init_point;
-  
-        
+
+
         setTimeout(async () => {
           try {
-            await axios.post("/nodemailer/compra-exitosa", { email: 'example@example.com' });
-            console.log('El segundo axios.post se realizó después de 5 minutos');
+            await axios.post("/nodemailer/compra-exitosa", {email: Cookies.get("email") });
+            console.log('El segundo axios.post se realizó después de 1 minutos');
           } catch (error) {
             console.error("Error al realizar el segundo axios.post:", error);
           }
-        }, 1 * 60 * 1000); 
+        }, 20 * 1000); 
       }
     } catch (error) {
       console.error("Error al realizar la compra:", error);
