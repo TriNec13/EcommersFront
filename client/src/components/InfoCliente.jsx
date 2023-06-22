@@ -15,6 +15,7 @@ const InfoCliente = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [admin, setAdmin] = useState("");
   const [pass, setPass] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -35,6 +36,7 @@ const InfoCliente = () => {
       setName(response.data.user.name);
       setLastName(response.data.user.last_name);
       setPhoneNumber(response.data.user.phone);
+      setAdmin(response.data.user.admin);
     } catch (error) {
       console.error(error);
     }
@@ -202,6 +204,11 @@ const InfoCliente = () => {
             <div className={styles.Botones}>
               <Link to="/compracliente">
                 {!editing && !editpass && <button>Mis Compras</button>}
+                {admin && (
+                  <Link to="/dashboard">
+                    <button className={styles.ButtonNav}>Administrador</button>
+                  </Link>
+                )}
               </Link>
               {!editing && !editpass && (
                 <div className={styles.Contraseña}>
@@ -252,7 +259,6 @@ const InfoCliente = () => {
         ) : (
           <div className={loader.loaderLarge}></div>
         )}
-        {!userData && <div className={loader.loaderLarge}></div>}
       </div>
     </div>
   );
