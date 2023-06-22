@@ -68,6 +68,7 @@ const initialState = {
     page: 1,
     platforms: [],
     licenses: [],
+    review: [],
   },
   review: [],
 };
