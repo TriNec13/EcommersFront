@@ -7,6 +7,7 @@ import loader from "../css/Loader.module.css";
 import Editar from "../img/Editar.png";
 import Llave from "../img/Llave.png";
 import SubirImagen from "./SubirImagen";
+import { useDispatch } from "react-redux";
 
 const InfoCliente = () => {
   const [userData, setUserData] = useState(null);
@@ -28,6 +29,7 @@ const InfoCliente = () => {
     .find((cookie) => cookie.trim().startsWith("login="));
   const token = tokenCookie.split("=")[1];
 
+
   const cookiesUsers = async () => {
     try {
       const response = await axios.post("/auth/user", { token: token });
@@ -44,6 +46,19 @@ const InfoCliente = () => {
   useEffect(() => {
     cookiesUsers();
   }, []);
+
+  useEffect(() => {
+    const getLC = () => {
+      const userDataLC = JSON.parse(localStorage.getItem('userData')) ?? [];  
+      setUserData(userDataLC);
+    }
+    getLC();
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }, [userData]);
+  
 
   const enableEditing = () => {
     setEditing(true);
