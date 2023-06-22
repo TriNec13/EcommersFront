@@ -242,7 +242,8 @@ export const loginUser = async (payload) => {
       }
     );
     console.log("esto es response de acitions: ", response)
-    const {token} = response
+    console.log("esto es response de acitions data: ", response.data)
+    const {token} = response.data
     console.log("esto es token: ", token)
     document.cookie = `login=${token}`
     localStorage.setItem("user", JSON.stringify(response.data));
@@ -251,6 +252,7 @@ export const loginUser = async (payload) => {
       icon: "success",
       timer: "2000",
     });
+    console.log("fin de la actions: ", response)
     return true;
   } catch (error) {
     Swal.fire({
