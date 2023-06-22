@@ -45,8 +45,9 @@ const CompraCliente = () => {
       [producto.id]: true,
     });
   };
-
+  
   const handleFormSubmit = (e, producto) => {
+    console.log("producto.id ",producto.id)
     e.preventDefault();
     const reviewData = {
       rating: review[producto.id].rating,
