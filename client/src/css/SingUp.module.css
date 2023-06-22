@@ -137,7 +137,7 @@
 	align-items: center;
 }
 
-.DivBotonesbutton {
+.BotonRegister {
 	gap: 10px;
 	background: #d8dbfb;
 	border-radius: 6px;
@@ -148,7 +148,7 @@
 	line-height: 30px;
 	color: #1c1934;
 	padding: 0.2em 0.5em;
-	margin-top: 15%;
+	margin-top: 10%;
 }
 
 .DivBotones p {
