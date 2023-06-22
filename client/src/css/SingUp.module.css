@@ -135,23 +135,10 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-.BotonRegister {
-	gap: 10px;
-	background: #d8dbfb;
-	border-radius: 6px;
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 30px;
-	color: #1c1934;
-	padding: 0.2em 0.5em;
 	margin-top: 10%;
 }
 
-.DivBotones p {
+.Login p {
 	margin-top: 10%;
 }
 
@@ -165,4 +152,22 @@
 	color: #14396A;
 	background: #468CCF;
 	background: linear-gradient(to top, #468CCF, #63B8EE);
+}
+
+.testbutton {
+	font-family: georgia;
+	font-weight: bold;
+	color: #1C1934 !important;
+	font-size: 14px;
+	text-shadow: 1px 1px 0px #7CACDE;
+	box-shadow: 1px 1px 1px #B8DFF9;
+	padding: 10px 25px;
+	border-radius: 10px;
+	border: 2px solid #3866A3;
+	background: #FFFFFF;
+}
+
+.testbutton:hover {
+	color: #14396A !important;
+	background: #9BB3CF;
 }
