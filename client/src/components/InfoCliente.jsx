@@ -21,18 +21,21 @@ const InfoCliente = () => {
   const [currentPassword, setCurrentPassword] = useState("");
 
   const id = userData?.id;
-  console.log("document.cookie: ",document.cookie)
-  console.log("document.cookie.login", document.cookie.login)
-  const token = document.cookie.login;
-  console.log("esto es token: ",token)
 
-  axios.post('/user', token)
-  .then(response => {
-    console.log("respuesta del post ",response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+  const cookieString = document.cookie;
+  const tokenCookie = cookieString.split(";").find((cookie) => cookie.trim().startsWith("login="));
+  const token = tokenCookie.split("=")[1];
+
+  console.log(token);
+
+  axios
+    .post("/user", token)
+    .then((response) => {
+      console.log("respuesta del post ", response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   const cookiesUsers = async () => {
     try {
@@ -144,7 +147,6 @@ const InfoCliente = () => {
   const isCurrentPasswordValid = () => {
     return currentPassword === userData.password;
   };
-  
 
   return (
     <div className={styles.General}>
@@ -251,7 +253,7 @@ const InfoCliente = () => {
                     </p>
                   )}
                   <div className={styles.BotonesPass}>
-                    <button >Guardar</button>
+                    <button>Guardar</button>
                     <button onClick={disablePass}>Cancelar</button>
                   </div>
                 </div>
