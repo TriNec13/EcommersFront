@@ -50,7 +50,6 @@ const CompraCliente = () => {
       userId: userData.id,
       productId: producto.id,
     };
-    console.log(reviewData)
     dispatch(actions.addReview(reviewData));
     setShowForm({
       ...showForm,
