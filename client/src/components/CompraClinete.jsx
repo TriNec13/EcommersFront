@@ -7,11 +7,12 @@ import axios from "axios";
 const CompraCliente = () => {
   const [review, setReview] = useState({});
   const [showForm, setShowForm] = useState({});
+  const [userData, setUserData] = useState({});
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
  
 
-  const id = localStorage.getItem("userData=id")
+  const {id} = localStorage.getItem(JSON.parse(userData))
   console.log(id)
 
   useEffect(() => {
