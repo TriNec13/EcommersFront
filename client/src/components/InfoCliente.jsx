@@ -30,18 +30,30 @@ const InfoCliente = () => {
 
   console.log(token);
 
-  axios
-    .post("/auth/user", { token: token })
-    .then((response) => {
-      console.log("respuesta del post ", response.data);
+  const cookiesUsers = async () => {
+    try {
+      const response = await axios.post("/auth/user", { token: token });
       setUserData(response.data.user);
       setName(response.data.user.name);
       setLastName(response.data.user.last_name);
       setPhoneNumber(response.data.user.phone);
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error(error);
-    });
+    }
+  };
+  
+  // axios
+  //   .post("/auth/user", { token: token })
+  //   .then((response) => {
+  //     console.log("respuesta del post ", response.data);
+  //     setUserData(response.data.user);
+  //     setName(response.data.user.name);
+  //     setLastName(response.data.user.last_name);
+  //     setPhoneNumber(response.data.user.phone);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 
   // const cookiesUsers = async () => {
   //   try {
@@ -57,9 +69,9 @@ const InfoCliente = () => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   cookiesUsers();
-  // }, []);
+  useEffect(() => {
+    cookiesUsers();
+  }, []);
 
   const enableEditing = () => {
     setEditing(true);
