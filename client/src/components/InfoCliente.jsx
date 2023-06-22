@@ -21,7 +21,8 @@ const InfoCliente = () => {
   const [currentPassword, setCurrentPassword] = useState("");
 
   const id = userData?.id;
-
+  console.log("document.cookie: ",document.cookie)
+  console.log("document.cookie.login", document.cookie.login)
   const token = document.cookie.login;
   console.log("esto es token: ",token)
 
