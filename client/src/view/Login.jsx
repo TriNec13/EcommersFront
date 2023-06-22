@@ -10,6 +10,7 @@ import Google from "../img/Google.png";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from '../components/Nav';
 import GoogleLoginButton from "../components/GoogleLoginButton";
+import Cookies from "js-cookie";
 
 export function Login() {
   useEffect(() => {
@@ -38,12 +39,12 @@ export function Login() {
     });
   };
 
-useEffect(() => {
-  const storedLoggedInStatus = localStorage.getItem("isLoggedIn");
-  if (storedLoggedInStatus) {
-    setIsLoggedIn(JSON.parse(storedLoggedInStatus));
-  }
-}, []);
+  useEffect(() => {
+    const storedLoggedInStatus = Cookies.get("isLoggedIn");
+    if (storedLoggedInStatus) {
+      setIsLoggedIn(JSON.parse(storedLoggedInStatus));
+    }
+  }, []);
 
   const handleSubmit = async (event, state) => {
     event.preventDefault();
