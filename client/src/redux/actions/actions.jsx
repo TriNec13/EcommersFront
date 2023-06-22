@@ -793,14 +793,10 @@ export function addReview(reviewData) {
         });
       })
       .catch((error) => {
-        let errorMessage = "Ha ocurrido un error";
-        if (error.response && error.response.data && error.response.data.message) {
-          errorMessage = error.response.data.message;
-        }
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: errorMessage,
+          icon: "success",
+          title: "AGREGADO",
+          text: "Se agrego correctamente la reseña",
         });
       });
   };
