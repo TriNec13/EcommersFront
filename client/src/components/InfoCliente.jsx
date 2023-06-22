@@ -23,13 +23,15 @@ const InfoCliente = () => {
   const id = userData?.id;
 
   const cookieString = document.cookie;
-  const tokenCookie = cookieString.split(";").find((cookie) => cookie.trim().startsWith("login="));
+  const tokenCookie = cookieString
+    .split(";")
+    .find((cookie) => cookie.trim().startsWith("login="));
   const token = tokenCookie.split("=")[1];
 
   console.log(token);
 
   axios
-    .post("/auth/user", token)
+    .post("/auth/user", { token: token })
     .then((response) => {
       console.log("respuesta del post ", response.data);
     })
