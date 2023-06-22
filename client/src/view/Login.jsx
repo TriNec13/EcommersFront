@@ -48,7 +48,6 @@ export function Login() {
 
   const handleSubmit = async (event, state) => {
     event.preventDefault();
-    console.log("se ejecuta login")
     const loginExitoso = await loginUser(state);
     if (loginExitoso) {
       setIsLoggedIn(true);

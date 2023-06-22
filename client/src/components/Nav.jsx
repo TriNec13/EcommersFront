@@ -97,7 +97,7 @@ const Nav = () => {
         <div className={styles.PerfilDropdown}>
           <img src={IconoUser} alt="User" className={styles.Perfil} />
           <div className={styles.PerfilContent}>
-            {login === "true" ? (
+            {localStorage.user ? (
               <>
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>

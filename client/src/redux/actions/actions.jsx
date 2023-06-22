@@ -247,7 +247,6 @@ export const loginUser = async (payload) => {
       icon: "success",
       timer: "2000",
     });
-    console.log("fin de la actions: ", response)
     return true;
   } catch (error) {
     Swal.fire({
