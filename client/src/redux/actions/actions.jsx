@@ -240,6 +240,9 @@ export const loginUser = async (payload) => {
         withCredentials: true
       }
     );
+    document.cookie = `login=${response.token}`
+    console.log("document ",document.cookie)
+    console.log("response: ", response.token)
     localStorage.setItem("user", JSON.stringify(response.data));
     Swal.fire({
       text: "Ha iniciado sesión correctamente",
