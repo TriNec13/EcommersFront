@@ -131,6 +131,10 @@ const InfoCliente = () => {
   const savePass = async () => {
     if (newPassword === confirmPassword) {
       try {
+        console.log("token: ",token)
+        console.log("email: ",userData.email)
+        console.log("oldPassword: ",oldPassword)
+        console.log("newPassword: ",confirmPassword)
         await axios.put(`/user`, {
           token: token,
           email: userData.email,
