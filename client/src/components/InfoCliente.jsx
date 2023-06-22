@@ -7,7 +7,7 @@ import loader from "../css/Loader.module.css";
 import Editar from "../img/Editar.png";
 import Llave from "../img/Llave.png";
 import SubirImagen from "./SubirImagen";
-import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const InfoCliente = () => {
   const [userData, setUserData] = useState(null);
@@ -141,9 +141,19 @@ const InfoCliente = () => {
           oldPassword: oldPassword,
           newPassword: confirmPassword,
         });
+        Swal.fire({
+          icon: "success",
+          title: "Modificación",
+          text: "Se modificó correctamente",
+        });
+        setEditing(false);
         disableEditing();
       } catch (error) {
-        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Contraseña actual incorrecta",
+        });
       }
     } else {
       console.log("Las contraseñas no coinciden");
