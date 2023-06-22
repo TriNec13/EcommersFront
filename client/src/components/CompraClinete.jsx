@@ -11,9 +11,10 @@ const CompraCliente = () => {
   const dispatch = useDispatch();
 
   let user = null;
+  let userData = null;
   const userDataString = localStorage.getItem("userData");
   if (userDataString !== null && userDataString !== undefined) {
-    const userData = JSON.parse(userDataString);
+    userData = JSON.parse(userDataString);
     user = userData.userId;
   } else {
     console.log();
@@ -21,6 +22,7 @@ const CompraCliente = () => {
   // const id = localStorage.getItem(JSON.parse(userData))
 
   console.log(user);
+  console.log(userData)
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
