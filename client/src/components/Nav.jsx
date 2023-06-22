@@ -48,6 +48,7 @@ const Nav = () => {
   };
 
   useEffect(() => {
+    console.log("cookies: ",cookiesUsers)
     cookiesUsers();
   }, []);
 
