@@ -9,6 +9,28 @@ const CompraCliente = () => {
   const [showForm, setShowForm] = useState({});
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+
+  const id = userData?.id;
+
+  const cookieString = document.cookie;
+  const tokenCookie = cookieString
+    .split(";")
+    .find((cookie) => cookie.trim().startsWith("login="));
+  const token = tokenCookie.split("=")[1];
+
+  const cookiesUsers = async () => {
+    try {
+      const response = await axios.post("/auth/user", { token: token });
+      setUserData(response.data.user);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    cookiesUsers();
+  }, []);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -21,11 +43,6 @@ const CompraCliente = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const userIdFromLocalStorage = localStorage.getItem("userId");
-  const userIdFromCookie = Cookies.get("userId");
-  const userId =
-    userIdFromLocalStorage ||
-    userIdFromCookie;
   const handleCreateReview = (producto) => {
     setReview({
       ...review,
@@ -42,7 +59,7 @@ const CompraCliente = () => {
     const reviewData = {
       rating: review[producto.id].rating,
       description: review[producto.id].description,
-      userId: userId,
+      userId: id,
       productId: producto.id,
     };
     dispatch(actions.addReview(reviewData));
