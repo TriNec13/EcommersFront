@@ -64,7 +64,6 @@ const Nav = () => {
     cookiesUsers();
   }, []);
   console.log("LS NAV",localStorage)
-  console.log("este es la bandera nav: ",isLoggedIn)
   console.log("LS NAV Bandera",localStorage.isLoggedIn)
   return (
     <div className={styles.Nav}>

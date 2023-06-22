@@ -31,6 +31,9 @@ export function Login() {
   };
 
   const SubmitUser = (e) => {
+    console.log("primero de isLoggedIn en login", localStorage.isLoggedIn)
+    localStorage.setItem('isLoggedIn', true);
+    console.log("segundo de isLoggedIn en login", localStorage.isLoggedIn)
     iniciarSesion({
       email: "",
       password: "",
@@ -128,14 +131,14 @@ useEffect(() => {
         <GoogleLoginButton>
             <img src={Google} className={style.Iconos} alt="Google" /> Continuar
             con Google</GoogleLoginButton>
-          <button>
+          {/* <button>
             <img src={Apple} className={style.Iconos} alt="Apple" /> Continuar
             con Apple
           </button>
           <button>
             <img src={Microsoft} className={style.Iconos} alt="Microsoft" />{" "}
             Continuar con Microsoft
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
