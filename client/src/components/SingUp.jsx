@@ -180,7 +180,7 @@ export function Register(props) {
           </div>
           <div className={style.DivBotones}>
             <button
-              className={style.DivBotonesbutton}
+              className={style.BotonRegister}
               type="submit"
               class="btn btn-primary"
             >
