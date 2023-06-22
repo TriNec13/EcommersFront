@@ -12,7 +12,7 @@ const CompraCliente = () => {
   const dispatch = useDispatch();
  
 
-  const {id} = localStorage.getItem(JSON.parse(userData))
+  const id = localStorage.getItem(JSON.parse(userData))
   console.log(id)
 
   useEffect(() => {
