@@ -139,14 +139,14 @@
 
 .DivBotonesbutton {
 	gap: 10px;
-	background: #d8dbfb;
-	border-radius: 6px;
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 30px;
-	color: #1c1934;
+    background: #1c1934;
+    color: #FFFFFF;
+    border-radius: 6px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
 	padding: 0.2em 0.5em;
 	margin-top: 10%;
 }
