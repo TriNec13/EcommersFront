@@ -15,14 +15,10 @@ const CompraCliente = () => {
   const userDataString = localStorage.getItem("userData");
   if (userDataString !== null && userDataString !== undefined) {
     userData = JSON.parse(userDataString);
-    user = userData.userId;
   } else {
     console.log();
   }
   // const id = localStorage.getItem(JSON.parse(userData))
-
-  console.log(userData.id);
-  console.log(userData)
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -47,7 +43,6 @@ const CompraCliente = () => {
   };
   
   const handleFormSubmit = (e, producto) => {
-    console.log("producto.id ",producto.id)
     e.preventDefault();
     const reviewData = {
       rating: review[producto.id].rating,
