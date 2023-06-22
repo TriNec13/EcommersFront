@@ -105,6 +105,7 @@ const Nav = () => {
           <div className={styles.PerfilContent}>
             {localStorage.isLoggedIn ? (
               <>
+                {console.log("este console es dentro de perfile",localStorage.isLoggedIn)}
                 <Link to="/infocliente">
                   <button className={styles.ButtonNav}>Mi Perfil</button>
                 </Link>
@@ -119,6 +120,7 @@ const Nav = () => {
               </>
             ) : (
               <Link to="/login">
+                {console.log("este console es fuera de perfile",localStorage.isLoggedIn)}
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
