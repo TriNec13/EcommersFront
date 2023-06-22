@@ -120,7 +120,7 @@ const ProductTable = () => {
   };
 
   return (
-    <div className="antialiased bg-gray-50 dark:bg-gray-900">
+    <div className='antialiased bg-gray-50 dark:bg-slate-100 h-screen overflow-auto'>
     <div className="flex-wrap flex justify-between items-center mb-4">
       <div className="flex flex-wrap justify-between items-center">
         <SearchBar />
