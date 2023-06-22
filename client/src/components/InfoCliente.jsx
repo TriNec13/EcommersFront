@@ -29,7 +29,7 @@ const InfoCliente = () => {
   console.log(token);
 
   axios
-    .post("/user", token)
+    .post("/auth/user", token)
     .then((response) => {
       console.log("respuesta del post ", response.data);
     })
