@@ -241,11 +241,7 @@ export const loginUser = async (payload) => {
         withCredentials: true
       }
     );
-    console.log("esto es response de acitions: ", response)
-    console.log("esto es response de acitions data: ", response.data)
-    const {token} = response.data
-    console.log("esto es token: ", token)
-    document.cookie = `login=${token}`
+    document.cookie = `login=${response.data}`
     localStorage.setItem("user", JSON.stringify(response.data));
     Swal.fire({
       text: "Ha iniciado sesión correctamente",
