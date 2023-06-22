@@ -141,16 +141,16 @@ const InfoCliente = () => {
           icon: "success",
           title: "Modificación",
           text: "Se modificó correctamente",
+          timer: 1500,
         });
-        console.log(editpass)
         setEditpass(false);
-        console.log(editpass)
         disableEditing();
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Contraseña actual incorrecta",
+          timer: 1500,
         });
       }
     } else {
