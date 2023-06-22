@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "../css/Nav.module.css";
 import LogoClaro from "../img/LogoClaro.png";
 import Carrito from "../img/Carrito.png";
@@ -11,11 +11,9 @@ import { useDispatch } from "react-redux";
 
 const Nav = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [admin, setAdmin] = useState(false);
   const dispatch = useDispatch();
-  const [login, setLogin] = useState("");
 
   const handleLogout = () => {
     dispatch(actions.logoutUser());
@@ -50,10 +48,6 @@ const Nav = () => {
         console.error(error);
       }
     };
-    if (tokenCookie) {
-      setLogin(true);
-    }
-    cookiesUsers();
   };
 
   useEffect(() => {
@@ -118,13 +112,11 @@ const Nav = () => {
                 <button className={styles.ButtonNav}>Iniciar Sesión</button>
               </Link>
             )}
-            {localStorage.isLoggedIn
-              ? admin && (
+            {admin && (
                   <Link to="/dashboard">
                     <button className={styles.ButtonNav}>Administrador</button>
                   </Link>
-                )
-              : null}
+                )}
           </div>
         </div>
       </div>
