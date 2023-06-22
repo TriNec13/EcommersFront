@@ -101,8 +101,8 @@ const InfoCliente = () => {
     }
   };
 
-  localStorage.setItem("email",userData.email)
-  console.log("email: ",localStorage.email)
+  localStorage.setItem("email", userData.email);
+console.log("email: ", localStorage.getItem("email"));
 
   const handleSave = (image) => {
     setUserData({
