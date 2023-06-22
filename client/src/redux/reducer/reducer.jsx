@@ -68,8 +68,8 @@ const initialState = {
     page: 1,
     platforms: [],
     licenses: [],
-    review: [],
   },
+  review: [],
 };
 
 const rootReducer = (state = initialState, action) => {
