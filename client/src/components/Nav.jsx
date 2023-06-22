@@ -35,26 +35,29 @@ const Nav = () => {
     pathname === "/home" && window.location.reload();
   };
 
-  const cookieString = document.cookie;
-  const tokenCookie = cookieString
-    .split(";")
-    .find((cookie) => cookie.trim().startsWith("login="));
-  const token = tokenCookie.split("=")[1];
+  const validaruser = () => {
+    const cookieString = document.cookie;
+    const tokenCookie = cookieString
+      .split(";")
+      .find((cookie) => cookie.trim().startsWith("login="));
+    const token = tokenCookie.split("=")[1];
 
-  const cookiesUsers = async () => {
-    try {
-      const response = await axios.post("/auth/user", { token: token });
-      const admin = response.data.user.admin;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
+    const cookiesUsers = async () => {
+      try {
+        const response = await axios.post("/auth/user", { token: token });
+        const admin = response.data.user.admin;
+      } catch (error) {
+        console.error(error);
+      }
+    };
     if (tokenCookie) {
       setLogin(true);
     }
     cookiesUsers();
+  };
+
+  useEffect(() => {
+    validaruser();
   }, []);
 
   return (
