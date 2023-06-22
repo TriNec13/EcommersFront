@@ -27,6 +27,7 @@ const InfoCliente = () => {
       const response = await axios.get("/auth/user", {
         withCredentials: true,
       });
+      console.log("esto es response",response)
       setUserData(response.data.user);
       setName(response.data.user.name);
       setLastName(response.data.user.last_name);
