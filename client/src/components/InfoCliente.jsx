@@ -43,23 +43,23 @@ const InfoCliente = () => {
       console.error(error);
     });
 
-  const cookiesUsers = async () => {
-    try {
-      const response = await axios.get("/auth/user", {
-        withCredentials: true,
-      });
-      setUserData(response.data.user);
-      setName(response.data.user.name);
-      setLastName(response.data.user.last_name);
-      setPhoneNumber(response.data.user.phone);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const cookiesUsers = async () => {
+  //   try {
+  //     const response = await axios.get("/auth/user", {
+  //       withCredentials: true,
+  //     });
+  //     setUserData(response.data.user);
+  //     setName(response.data.user.name);
+  //     setLastName(response.data.user.last_name);
+  //     setPhoneNumber(response.data.user.phone);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    cookiesUsers();
-  }, []);
+  // useEffect(() => {
+  //   cookiesUsers();
+  // }, []);
 
   const enableEditing = () => {
     setEditing(true);
